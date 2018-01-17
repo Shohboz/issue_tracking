@@ -1,8 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { withRouter } from "react-router";
-
-const Layout = ({ children }) => <div>{children}</div>;
+import Layout from "components/Layout";
 
 const Project = () => <div>Project</div>;
 
