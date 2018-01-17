@@ -1,0 +1,20 @@
+const { version, name } = require("../package.json");
+const { execSync } = require("child_process");
+const { resolve, join } = require("path");
+const { mkdirSync } = require("fs");
+
+const src = "build";
+const dest = "distrib";
+const newName = `${name}-${version}`;
+const fileName = `${newName}.tar.gz`;
+
+try {
+  mkdirSync(resolve(__dirname, "..", dest));
+  execSync(`tar -cvzf ${join(dest, fileName)} --transform 'flags=r;s|${src}|${newName}|' ${src}`);
+} catch (err) {
+  if (err.code !== "EEXIST") {
+    throw new Error(err);
+  }
+} finally {
+  console.log("task completed");
+}
