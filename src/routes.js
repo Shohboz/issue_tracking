@@ -2,10 +2,11 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { withRouter } from "react-router";
 import Layout from "components/Layout";
+import Projects from "routes/Projects";
 
-const Project = () => <div>Project</div>;
-
-const Projects = () => <div>Projects</div>;
+const Project = ({ match: { params: { projectID: id } } }) => (
+  <div>Project #{id}</div>
+);
 
 export default (
   <Layout>
