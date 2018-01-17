@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
+    "history": "^4.7.2",
     "isomorphic-fetch": "^2.2.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -24,7 +25,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "dist": "npm run build && node ./scripts/dist"
-
   },
   "devDependencies": {
     "cross-env": "^5.1.3",

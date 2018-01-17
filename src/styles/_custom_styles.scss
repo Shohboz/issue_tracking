@@ -1,0 +1,21 @@
+.pagination > li {
+  cursor: pointer;
+  @include user-select(none);
+}
+
+.notifications-container {
+  position: fixed;
+  top: 80px;
+  right: 12px;
+  z-index: 99999;
+}
+
+.notification {
+  position: relative;
+  padding: 15px 15px 15px 20px;
+  width: 300px;
+}
+
+li {
+  list-style: none;
+}
