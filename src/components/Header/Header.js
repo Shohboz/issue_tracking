@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Navbar, Nav, NavDropdown, MenuItem } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { loadAll as load } from "redux/presets/actions";
+import MenuItem from "components/MenuItem";
 
 const NavItem = ({ name: title, list }, idx) => (
   <NavDropdown key={idx} title={title} id={`dropdown-${idx}`}>
     {list.map(item => (
-      <MenuItem key={item.id} href={`/${item.name}/${item.id}`}>
+      <MenuItem key={item.id} href={`/${title}/${item.id}`}>
         {item.name}
       </MenuItem>
     ))}
