@@ -1,17 +1,17 @@
 import { loadAll as load } from "redux/projects/actions";
 import { withLoader } from "components/HOC";
-import Projects from "../components";
+import Issues from "../components";
 
 const mapStateToProps = ({
-  projects: { main: { isFetching, errors, list } }
+  issues: { main: { isFetching, errors, list } }
 }) => ({
   errors,
   list,
   isFetching
 });
 
-export default withLoader(Projects)({
+export default withLoader(Issues)({
   action: load,
   mapStateToProps,
-  prop: "projectID"
+  prop: "issueID"
 });

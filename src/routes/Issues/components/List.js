@@ -7,6 +7,9 @@ const TableHeader = () => (
     <tr>
       <th>ID</th>
       <th>Название</th>
+      <th>Статус</th>
+      <th>Уполномоченный</th>
+      <th>Докладчик</th>
       <th>Дата создания</th>
       <th>Действия</th>
     </tr>
@@ -14,17 +17,20 @@ const TableHeader = () => (
 );
 
 const EditButton = ({ id }) => (
-  <Link to={`/projects/${id}`}>
+  <Link to={`/issues/${id}`}>
     <div className="btn btn-default">
       <i className="glyphicon glyphicon-pencil" />
     </div>
   </Link>
 );
 
-const Project = ({ id, name, created }) => (
+const Issue = ({ id, name, created, assignee, reporter, status }) => (
   <tr>
     <td>{id}</td>
     <td>{name}</td>
+    <td>{status}</td>
+    <td>{assignee}</td>
+    <td>{reporter}</td>
     <td>{created && new Date(created).toLocaleDateString()}</td>
     <td>
       <EditButton id={id} />
@@ -33,7 +39,7 @@ const Project = ({ id, name, created }) => (
 );
 
 const TableBody = ({ items }) => (
-  <tbody>{items.map(item => <Project key={item.id} {...item} />)}</tbody>
+  <tbody>{items.map(item => <Issue key={item.id} {...item} />)}</tbody>
 );
 
 const PanelBody = ({ children }) => (
