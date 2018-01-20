@@ -1,4 +1,4 @@
-import { loadAll as load } from "redux/projects/actions";
+import { loadAll as load } from "redux/issues/actions";
 import { withLoader } from "components/HOC";
 import Issues from "../components";
 
