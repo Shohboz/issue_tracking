@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Grid } from "react-bootstrap";
 import { loadAll as load } from "redux/projects/actions";
+import Preloader from "components/Preloader";
+import ErrorPage from "components/ErrorPage";
 import Projects from "../components/Panel";
-
-const Preloader = () => <div>Loading...</div>;
-const ErrorPage = () => <div>Error</div>;
 
 class App extends Component {
   componentDidMount() {
