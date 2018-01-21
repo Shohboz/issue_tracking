@@ -22,7 +22,7 @@ const receiveFail = (errors, name) => ({
 export function load(id, name) {
   return dispatch => {
     dispatch(loadStart(name));
-    return API.get(id)
+    return API.get(id, name)
       .then(response => response.json())
       .then(json => dispatch(receiveList(json, name)))
       .catch(errors => dispatch(receiveFail(errors, name)));

@@ -1,7 +1,7 @@
 import { loadAll as load } from "redux/issues/actions";
 import { Grid } from "react-bootstrap";
 import { withLoader } from "components/HOC";
-import Issues from "../components";
+import List from "../components";
 
 const mapStateToProps = ({
   issues: { main: { isFetching, errors, list } }
@@ -11,7 +11,7 @@ const mapStateToProps = ({
   isFetching
 });
 
-export default withLoader(Issues)(Grid)({
+export default withLoader(List)(Grid)({
   action: load,
   mapStateToProps,
   prop: "issueID"

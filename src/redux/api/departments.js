@@ -1,8 +1,8 @@
 import fetch from "isomorphic-fetch";
 
 export default class API {
-  static get(projectID = "", name = "") {
-    const url = `/api/projects/${projectID}/${name}`;
+  static get(departmentID = "") {
+    const url = `/api/departments/${departmentID}`;
     return fetch(url, {
       credentials: "include"
     });

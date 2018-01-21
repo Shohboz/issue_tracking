@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import NoItems from "components/EmptyList";
 
 const TableHeader = () => (
   <thead>
@@ -14,7 +13,7 @@ const TableHeader = () => (
 );
 
 const EditButton = ({ id }) => (
-  <Link to={`/projects/${id}`}>
+  <Link to={`/departments/${id}`}>
     <div className="btn btn-default">
       <i className="glyphicon glyphicon-pencil" />
     </div>
@@ -22,7 +21,7 @@ const EditButton = ({ id }) => (
 );
 
 const Item = ({ id, name, created }) => (
-  <tr>
+  <tr key={id}>
     <td>{id}</td>
     <td>{name}</td>
     <td>{created && new Date(created).toLocaleDateString()}</td>
@@ -31,26 +30,11 @@ const Item = ({ id, name, created }) => (
     </td>
   </tr>
 );
+const TableBody = ({ items }) => <tbody>{items.map(Item)}</tbody>;
 
-const TableBody = ({ items }) => (
-  <tbody>{items.map(item => <Item key={item.id} {...item} />)}</tbody>
-);
-
-const PanelBody = ({ children }) => (
-  <div className="panel-body">
-    <div className="row">
-      <div className="col-sm-12">{children}</div>
-    </div>
-  </div>
-);
-
-const Items = ({ items }) => (
+export default ({ items }) => (
   <table className="table table-striped">
     <TableHeader />
     <TableBody items={items} />
   </table>
-);
-
-export default ({ items }) => (
-  <PanelBody>{items.length ? <Items items={items} /> : <NoItems />}</PanelBody>
 );
