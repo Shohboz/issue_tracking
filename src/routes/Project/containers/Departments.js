@@ -1,9 +1,21 @@
+import React from "react";
 import { load } from "redux/project/actions";
 import { withLoader } from "components/HOC";
-import withPanel from "components/List";
 import Items from "routes/Departments/components";
+import { compose } from "recompose";
+import { enhancements } from "components/ComposableList";
+import { Footer } from "components/Panel";
+import PanelHeader from "routes/Departments/components/PanelHeader";
+import withPanel from "components/List";
 
-const List = withPanel(Items)({ title: "Список департаментов" });
+const { withPaginate, withFilter } = enhancements;
+
+const List = compose(withFilter(), withPaginate({ size: 10 })(Footer))(Items);
+
+const PaginatedList = ({ items }) => [
+  <PanelHeader key="header" />,
+  <List items={items} uniqueKey={"departments"} key="list" />
+];
 
 const mapStateToProps = ({
   projects: { current: { departments: { isFetching, errors, list } } }
@@ -13,7 +25,9 @@ const mapStateToProps = ({
   isFetching
 });
 
-export default withLoader(List)()({
+export default withLoader(
+  withPanel(PaginatedList)({ title: "Список департаментов" })
+)()({
   action: load,
   name: "departments",
   mapStateToProps,

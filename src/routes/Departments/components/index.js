@@ -1,4 +1,5 @@
 import React from "react";
+import { Body as PanelBody } from "components/Panel";
 import { Link } from "react-router-dom";
 
 const TableHeader = () => (
@@ -33,8 +34,10 @@ const Item = ({ id, name, created }) => (
 const TableBody = ({ items }) => <tbody>{items.map(Item)}</tbody>;
 
 export default ({ items }) => (
-  <table className="table table-striped">
-    <TableHeader />
-    <TableBody items={items} />
-  </table>
+  <PanelBody>
+    <table className="table table-striped">
+      <TableHeader />
+      <TableBody items={items} />
+    </table>
+  </PanelBody>
 );
