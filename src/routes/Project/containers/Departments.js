@@ -5,15 +5,22 @@ import Items from "routes/Departments/components";
 import { compose } from "recompose";
 import { enhancements } from "components/ComposableList";
 import { Footer } from "components/Panel";
-import PanelHeader from "routes/Departments/components/PanelHeader";
 import withPanel from "components/List";
+import { Search as PanelHeader } from "components/Panel";
 
 const { withPaginate, withFilter } = enhancements;
 
 const List = compose(withFilter(), withPaginate({ size: 10 })(Footer))(Items);
 
 const PaginatedList = ({ items }) => [
-  <PanelHeader key="header" />,
+  <PanelHeader
+    key="header"
+    searchBy={["name"]}
+    uniqueKey="departments"
+    placeholder={"Поиск по названию отдела"}
+    title={"Добавить отдел"}
+    link={"/departments/new"}
+  />,
   <List items={items} uniqueKey={"departments"} key="list" />
 ];
 
@@ -26,7 +33,7 @@ const mapStateToProps = ({
 });
 
 export default withLoader(
-  withPanel(PaginatedList)({ title: "Список департаментов" })
+  withPanel(PaginatedList)({ title: "Список отделов" })
 )()({
   action: load,
   name: "departments",

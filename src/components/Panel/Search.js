@@ -4,23 +4,23 @@ import { Body as PanelBody } from "components/Panel";
 import { components } from "components/ComposableList";
 const { Filter } = components;
 
-const CreateButton = () => (
-  <Link to={"/departments/new"}>
+const CreateButton = ({ title, link }) => (
+  <Link to={link}>
     <div className="form-inline pull-right">
-      <button className="btn btn-default" title="Добавить департамент">
+      <button className="btn btn-default" title={title}>
         <i className="glyphicon glyphicon-plus" />
       </button>
     </div>
   </Link>
 );
 
-export default () => (
+export default ({ searchBy, uniqueKey, placeholder, title, link }) => (
   <PanelBody>
-    <CreateButton />
+    <CreateButton title={title} link={link} />
     <Filter
-      uniqueKey={"departments"}
-      searchBy={["name"]}
-      placeholder={"Поиск по названию департамента"}
+      uniqueKey={uniqueKey}
+      searchBy={searchBy}
+      placeholder={placeholder}
     />
   </PanelBody>
 );

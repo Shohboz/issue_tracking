@@ -1,6 +1,7 @@
 import React from "react";
 import { Body as PanelBody } from "components/Panel";
 import { Link } from "react-router-dom";
+import NoItems from "components/EmptyList";
 
 const TableHeader = () => (
   <thead>
@@ -36,8 +37,14 @@ const TableBody = ({ items }) => <tbody>{items.map(Item)}</tbody>;
 export default ({ items }) => (
   <PanelBody>
     <table className="table table-striped">
-      <TableHeader />
-      <TableBody items={items} />
+      {items.length ? (
+        [
+          <TableHeader key="projects-header" />,
+          <TableBody items={items} key="projects-list" />
+        ]
+      ) : (
+        <NoItems />
+      )}
     </table>
   </PanelBody>
 );

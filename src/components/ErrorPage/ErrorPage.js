@@ -11,7 +11,7 @@ export default ({ errors }) => (
           <div className="error-template">
             <h1>Упс!</h1>
             <h2>Что-то пошло не так</h2>
-            <div className="error-details">{errors.message}</div>
+            <div className="error-details">{errors && errors.message}</div>
           </div>
         </Col>
       </Row>
