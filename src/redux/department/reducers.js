@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { REQUEST_FAIL, REQUEST_SUCCESS, REQUEST_START } from "./constants";
-import current from "redux/department/reducers";
+import wrapperReducer from "redux/containers/wrapperReducer";
 
 const initialState = {
   isFetching: false,
@@ -39,5 +39,5 @@ export function main(state = initialState, action) {
 
 export default combineReducers({
   main,
-  current
+  projects: wrapperReducer(main, "projects")
 });

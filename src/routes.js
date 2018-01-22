@@ -5,6 +5,7 @@ import Layout from "components/Layout";
 import Project from "routes/Project";
 import Projects from "routes/Projects";
 import Departments from "routes/Departments";
+import Department from "routes/Department";
 import Issues from "routes/Issues";
 import ErrorPage from "components/ErrorPage";
 import { Body as PanelBody } from "components/Panel";
@@ -27,15 +28,12 @@ export default (
         path={`/projects/:projectID`}
         component={withRouter(Project)}
       />
-
       <Route exact path={`/issues/:issueID`} component={NotFound} />
-
+      <Route exact path={"/issues"} component={Issues} />
       <Route exact path={"/projects"} component={Projects} />
       <Route exact path={"/departments/new"} component={NotFound} />
-
+      <Route exact path={"/departments/:departmentID"} component={Department} />
       <Route exact path={"/departments"} component={Departments} />
-      <Route exact path={"/departments/:departmentID"} component={NotFound} />
-      <Route exact path={"/issues"} component={Issues} />
       <Route path={"*"} component={Projects} />
     </Switch>
   </Layout>

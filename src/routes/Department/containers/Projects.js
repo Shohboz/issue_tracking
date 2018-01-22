@@ -1,7 +1,7 @@
 import React from "react";
-import { load } from "redux/project/actions";
+import { load } from "redux/department/actions";
 import { withLoader } from "components/HOC";
-import Items from "routes/Issues/components";
+import Items from "routes/Projects/components";
 import { compose } from "recompose";
 import { enhancements } from "components/ComposableList";
 import { Footer } from "components/Panel";
@@ -16,16 +16,16 @@ const PaginatedList = ({ items }) => [
   <PanelHeader
     key="header"
     searchBy={["name"]}
-    uniqueKey="issues"
-    placeholder={"Поиск по названию"}
-    title={"Добавить вопрос"}
-    link={"/issues/new"}
+    uniqueKey="departments-projects"
+    placeholder={"Поиск по названию проекта"}
+    title={"Добавить проект"}
+    link={"/projects/new"}
   />,
-  <List items={items} uniqueKey={"issues"} key="list" />
+  <List items={items} uniqueKey={"departments-projects"} key="list" />
 ];
 
 const mapStateToProps = ({
-  projects: { current: { issues: { isFetching, errors, list } } }
+  departments: { current: { projects: { isFetching, errors, list } } }
 }) => ({
   errors,
   list,
@@ -33,10 +33,10 @@ const mapStateToProps = ({
 });
 
 export default withLoader(
-  withPanel(PaginatedList)({ title: "Список вопросов проекта" })
+  withPanel(PaginatedList)({ title: "Список проектов отдела" })
 )()({
   action: load,
-  name: "issues",
+  name: "projects",
   mapStateToProps,
-  prop: "projectID"
+  prop: "departmentID"
 });

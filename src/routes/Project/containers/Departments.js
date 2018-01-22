@@ -33,7 +33,7 @@ const mapStateToProps = ({
 });
 
 export default withLoader(
-  withPanel(PaginatedList)({ title: "Список отделов" })
+  withPanel(PaginatedList)({ title: "Список отделов проекта" })
 )()({
   action: load,
   name: "departments",
