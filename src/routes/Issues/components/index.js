@@ -9,8 +9,8 @@ const TableHeader = () => (
       <th>ID</th>
       <th>Название</th>
       <th>Статус</th>
-      <th>Уполномоченный</th>
-      <th>Докладчик</th>
+      <th>Исполнитель</th>
+      <th>Автор</th>
       <th>Дата создания</th>
       <th>Действия</th>
     </tr>
@@ -26,7 +26,7 @@ const EditButton = ({ id }) => (
 );
 
 const Item = ({ id, name, created, assignee, reporter, status }) => (
-  <tr>
+  <tr key={id}>
     <td>{id}</td>
     <td>{name}</td>
     <td>{status}</td>

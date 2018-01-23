@@ -9,7 +9,8 @@ import Department from "routes/Department";
 import Issues from "routes/Issues";
 import ErrorPage from "components/ErrorPage";
 import { Body as PanelBody } from "components/Panel";
-import Form from "routes/Project/components/Panel";
+import ProjectForm from "routes/Project/components/Panel";
+import DepartmentForm from "routes/Department/components/Panel";
 
 const NotFound = () => (
   <div className="container">
@@ -22,7 +23,7 @@ const NotFound = () => (
 export default (
   <Layout>
     <Switch>
-      <Route exact path={"/projects/new"} component={Form} />
+      <Route exact path={"/projects/new"} component={ProjectForm} />
       <Route
         exact
         path={`/projects/:projectID`}
@@ -31,7 +32,7 @@ export default (
       <Route exact path={`/issues/:issueID`} component={NotFound} />
       <Route exact path={"/issues"} component={Issues} />
       <Route exact path={"/projects"} component={Projects} />
-      <Route exact path={"/departments/new"} component={NotFound} />
+      <Route exact path={"/departments/new"} component={DepartmentForm} />
       <Route exact path={"/departments/:departmentID"} component={Department} />
       <Route exact path={"/departments"} component={Departments} />
       <Route path={"*"} component={Projects} />
