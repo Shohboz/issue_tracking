@@ -7,7 +7,7 @@ const { Filter } = components;
 const CreateButton = ({ title, link }) => (
   <Link to={link}>
     <div className="form-inline pull-right">
-      <button className="btn btn-default" title={title}>
+      <button className="btn btn-default btn-success" title={title}>
         <i className="glyphicon glyphicon-plus" />
       </button>
     </div>
