@@ -1,3 +1,9 @@
 export const REQUEST_START = "departments/REQUEST_START";
 export const REQUEST_SUCCESS = "departments/REQUEST_SUCCESS";
 export const REQUEST_FAIL = "departments/REQUEST_FAIL";
+export const REQUEST_SAVE = "departments/REQUEST_SAVE";
+export const REQUEST_UPDATE = "departments/REQUEST_UPDATE";
+export const SAVE_COMPLETE = "departments/SAVE_COMPLETE";
+export const UPDATE_COMPLETE = "departments/UPDATE_COMPLETE";
+export const UPDATE_OK = "departments/UPDATE_OK";
+export const SAVE_OK = "departments/SAVE_OK";

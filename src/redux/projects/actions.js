@@ -1,4 +1,17 @@
-import { REQUEST_START, REQUEST_SUCCESS, REQUEST_FAIL } from "./constants";
+import {
+  REQUEST_START,
+  REQUEST_SUCCESS,
+  REQUEST_FAIL,
+  REQUEST_SAVE,
+  REQUEST_UPDATE,
+  SAVE_COMPLETE,
+  UPDATE_COMPLETE,
+  UPDATE_OK,
+  SAVE_OK
+} from "./constants";
+import { createNotification } from "redux/notifications/actions";
+import { SUCCESS, FAIL } from "redux/notifications/constants";
+import { history } from "redux/configureStore";
 import API from "redux/api/projects";
 
 const loadStart = () => ({
@@ -22,6 +35,73 @@ export function loadAll() {
     return API.get()
       .then(response => response.json())
       .then(json => dispatch(receiveList(json)))
+      .catch(errors => dispatch(receiveFail(errors)));
+  };
+}
+
+export function save(data) {
+  return data.id ? update(data) : create(data);
+}
+
+export function create(data) {
+  return dispatch => {
+    dispatch({ type: REQUEST_SAVE });
+    return API.create(data)
+      .then(response =>
+        response.json().then(json => ({
+          ok: response.ok,
+          status: response.status,
+          json
+        }))
+      )
+      .then(response => {
+        if (response.ok) {
+          response.json &&
+            response.json.id &&
+            history.push(`/projects/${response.json.id}`);
+          createNotification(dispatch, {
+            type: SUCCESS,
+            text: `Проект #${response.json.id} успешно создан`
+          });
+          dispatch({ type: SAVE_OK, payload: response.json });
+        } else {
+          createNotification(dispatch, {
+            type: FAIL,
+            text: "Создание проекта завершилось ошибкой"
+          });
+        }
+        return dispatch({ type: SAVE_COMPLETE, payload: response.json });
+      })
+      .catch(errors => dispatch(receiveFail(errors)));
+  };
+}
+
+export function update(data) {
+  return dispatch => {
+    dispatch({ type: REQUEST_UPDATE });
+    return API.update(data)
+      .then(response =>
+        response.json().then(json => ({
+          ok: response.ok,
+          status: response.status,
+          json
+        }))
+      )
+      .then(response => {
+        if (response.ok) {
+          createNotification(dispatch, {
+            type: SUCCESS,
+            text: `Проект #${response.json.id} успешно обновлен`
+          });
+          dispatch({ type: UPDATE_OK, payload: response.json });
+        } else {
+          createNotification(dispatch, {
+            type: FAIL,
+            text: "Обновление проекта завершилось ошибкой"
+          });
+        }
+        return dispatch({ type: UPDATE_COMPLETE, payload: response.json });
+      })
       .catch(errors => dispatch(receiveFail(errors)));
   };
 }

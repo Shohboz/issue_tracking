@@ -7,4 +7,16 @@ export default class API {
       credentials: "include"
     });
   }
+
+  static create(data) {
+    const url = `/api/projects`;
+    return fetch(url, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+  }
 }

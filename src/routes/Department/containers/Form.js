@@ -1,27 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ProjectForm from "../components/Form";
-import { addNotification } from "redux/notifications/actions";
-import { FAIL } from "redux/notifications/constants";
+import Form from "../components/Form";
+import { save } from "redux/departments/actions";
 
-let counter = 0;
-
-class Form extends Component {
-  onSubmit = () => {
-    const { addNotification } = this.props;
-    counter++;
-    addNotification(
-      {
-        type: FAIL,
-        text: `Создание проекта недоступно`
-      },
-      counter
-    );
+class ReduxForm extends Component {
+  onSubmit = data => {
+    const { save } = this.props;
+    save(data);
   };
 
   render() {
-    return <ProjectForm {...this.props} onSubmit={this.onSubmit} />;
+    return <Form {...this.props} onSubmit={this.onSubmit} />;
   }
 }
 
-export default connect(null, { addNotification })(Form);
+export default connect(null, { save })(ReduxForm);
+

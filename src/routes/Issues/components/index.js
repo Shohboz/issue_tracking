@@ -32,7 +32,7 @@ const Item = ({ id, name, created, assignee, reporter, status }) => (
     <td>{status}</td>
     <td>{assignee}</td>
     <td>{reporter}</td>
-    <td>{created && new Date(created).toLocaleDateString()}</td>
+    <td>{created && new Date(created * 1000).toLocaleDateString()}</td>
     <td>
       <EditButton id={id} />
     </td>
