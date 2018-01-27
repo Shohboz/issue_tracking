@@ -15,4 +15,3 @@ class ReduxForm extends Component {
 }
 
 export default connect(null, { save })(ReduxForm);
-

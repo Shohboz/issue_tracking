@@ -1,3 +1,3 @@
 import RenderField from "./RenderField";
 
-export { RenderField };
+export { RenderField, RenderField as default };

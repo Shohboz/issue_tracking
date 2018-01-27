@@ -1,3 +1,1 @@
-import React from "react";
-
-export default () => <div>Нет данных для отображения</div>;
+export default () => "Нет данных для отображения";
