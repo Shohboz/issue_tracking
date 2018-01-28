@@ -14,4 +14,11 @@ class ReduxForm extends Component {
   }
 }
 
-export default connect(null, { save })(ReduxForm);
+const optionsRole = [
+  { value: "admin", label: "admin" },
+  { value: "user", label: "user" }
+];
+
+const mapStateToProps = () => ({ optionsRole });
+
+export default connect(mapStateToProps, { save })(ReduxForm);

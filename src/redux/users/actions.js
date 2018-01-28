@@ -61,7 +61,7 @@ export function create(data) {
             history.push(`/users/${response.json.id}`);
           createNotification(dispatch, {
             type: SUCCESS,
-            text: `Проект #${response.json.id} успешно создан`
+            text: `Пользователь #${response.json.id} успешно создан`
           });
           dispatch({ type: SAVE_OK, payload: response.json });
         } else {

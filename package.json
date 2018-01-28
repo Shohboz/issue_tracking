@@ -12,6 +12,7 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
+    "react-select": "^1.2.1",
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
     "redux-form": "^7.2.1",
@@ -20,10 +21,8 @@
     "reselect": "^3.0.1"
   },
   "scripts": {
-    "build-css":
-      "node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles/ -o src/styles/",
-    "watch-css":
-      "npm run build-css && node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles/ -o src/styles --watch --recursive",
+    "build-css": "node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles/ -o src/styles/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles/ -o src/styles --watch --recursive",
     "start-js": "react-scripts start",
     "start": "cross-env NODE_PATH=src npm-run-all -p watch-css start-js",
     "build": "react-scripts build",
