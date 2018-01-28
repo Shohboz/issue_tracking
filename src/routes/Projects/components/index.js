@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Body as PanelBody } from "components/Panel";
+import { Panel } from "react-bootstrap";
 import NoItems from "components/EmptyList";
 
 const TableHeader = () => (
@@ -38,7 +38,7 @@ const TableBody = ({ items }) => (
 );
 
 export default ({ items }) => (
-  <PanelBody>
+  <Panel.Body>
     <table className="table table-striped">
       {items.length ? (
         [
@@ -49,5 +49,5 @@ export default ({ items }) => (
         <NoItems />
       )}
     </table>
-  </PanelBody>
+  </Panel.Body>
 );

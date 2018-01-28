@@ -1,6 +1,6 @@
 import React from "react";
+import { Panel } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Body as PanelBody } from "components/Panel";
 import { components } from "components/ComposableList";
 const { Filter } = components;
 
@@ -15,12 +15,12 @@ const CreateButton = ({ title, link }) => (
 );
 
 export default ({ searchBy, uniqueKey, placeholder, title, link }) => (
-  <PanelBody>
+  <Panel.Body>
     <CreateButton title={title} link={link} />
     <Filter
       uniqueKey={uniqueKey}
       searchBy={searchBy}
       placeholder={placeholder}
     />
-  </PanelBody>
+  </Panel.Body>
 );

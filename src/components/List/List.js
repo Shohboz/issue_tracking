@@ -1,8 +1,9 @@
 import React from "react";
+import { Panel } from "react-bootstrap";
 
 export default WrappedComponent => ({ title }) => ({ items }) => (
-  <div className="panel panel-default">
-    <div className="panel-heading">{title}</div>
+  <Panel>
+    <Panel.Heading>{title}</Panel.Heading>
     <WrappedComponent items={items} />
-  </div>
+  </Panel>
 );

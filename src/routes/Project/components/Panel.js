@@ -1,15 +1,14 @@
 import React from "react";
-import { Body as PanelBody } from "components/Panel";
 import Form from "../containers/Form";
-import { Grid } from "react-bootstrap";
+import { Grid, Panel } from "react-bootstrap";
 
 export default ({ data }) => (
   <Grid>
-    <div className="panel panel-default">
-      <div className="panel-heading">Форма создания проекта</div>
-      <PanelBody>
+    <Panel>
+      <Panel.Heading>Форма создания проекта</Panel.Heading>
+      <Panel.Body>
         <Form data={data} />
-      </PanelBody>
-    </div>
+      </Panel.Body>
+    </Panel>
   </Grid>
 );
