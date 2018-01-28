@@ -1,0 +1,22 @@
+import fetch from "isomorphic-fetch";
+
+export default class API {
+  static get(userID = "") {
+    const url = `/api/users/${userID}`;
+    return fetch(url, {
+      credentials: "include"
+    });
+  }
+
+  static create(data) {
+    const url = `/api/users`;
+    return fetch(url, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+  }
+}
