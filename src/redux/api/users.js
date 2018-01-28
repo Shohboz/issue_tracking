@@ -19,4 +19,17 @@ export default class API {
       body: JSON.stringify(data)
     });
   }
+
+  static update(data) {
+    const { id, ...res } = data;
+    return fetch(`/api/users/${id}`, {
+      credentials: "include",
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(res)
+    });
+  }
 }

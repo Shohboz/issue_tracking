@@ -25,7 +25,8 @@ export default (
       <Route exact path={`/issues/:issueID`} component={NotFound} />
       <Route exact path={"/issues"} component={Issues} />
       <Route exact path={"/projects"} component={Projects} />
-      <Route exact path={"/users/new"} component={UserForm} />
+      <Route exact path={"/users/new"} component={withRouter(UserForm)} />
+      <Route exact path={"/users/:userID"} component={withRouter(UserForm)} />
       <Route exact path={"/users"} component={Users} />
       <Route exact path={"/departments/new"} component={DepartmentForm} />
       <Route exact path={"/departments/:departmentID"} component={Department} />

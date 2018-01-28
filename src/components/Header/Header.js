@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { loadAll as load } from "redux/presets/actions";
-import MenuItem from "components/MenuItem";
+import { MenuItem, NavItem } from "components/Nav";
 
-const NavItem = ({ name: title, list }, idx) => (
+const NavItemDropDown = ({ name: title, list }, idx) => (
   <NavDropdown key={idx} title={title} id={`dropdown-${idx}`}>
     {list.map(item => (
       <MenuItem key={item.id} href={`/${title}/${item.id}`}>
@@ -22,7 +22,11 @@ const Header = ({ items }) => (
         <Link to={"/"}>issue tracking</Link>
       </Navbar.Brand>
     </Navbar.Header>
-    <Nav>{items.map(NavItem)}</Nav>
+    <Nav>
+      {items.map(NavItemDropDown)}
+      <NavItem href={"/users"}>users</NavItem>
+      <NavItem href={"/issues"}>issues</NavItem>
+    </Nav>
   </Navbar>
 );
 

@@ -8,7 +8,7 @@ import {
   UPDATE_OK,
   SAVE_OK
 } from "./constants";
-// import current from "redux/users/reducers";
+import current from "redux/user/reducers";
 
 const initialState = {
   isFetching: false,
@@ -80,6 +80,6 @@ export function main(state = initialState, action) {
 }
 
 export default combineReducers({
-  main
-  // current
+  main,
+  current
 });

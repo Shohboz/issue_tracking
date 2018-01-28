@@ -16,9 +16,9 @@ const List = compose(withFilter(), withPaginate({ size: 10 })(Footer))(Items);
 const PaginatedList = ({ items }) => [
   <PanelHeader
     key="header"
-    searchBy={["name"]}
+    searchBy={["name", "login", "email"]}
     uniqueKey="users"
-    placeholder={"Поиск по имени пользователя"}
+    placeholder={"Поиск по имени пользователя/логину/почте"}
     title={"Добавить пользователя"}
     link={"/users/new"}
   />,
