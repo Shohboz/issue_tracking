@@ -1,6 +1,10 @@
 import React from "react";
 import { reduxForm, Field } from "redux-form";
-import { RenderField, RenderSelect } from "components/Fields";
+import {
+  RenderField,
+  RenderSelect,
+  RenderTextareaField
+} from "components/Fields";
 import { required } from "redux/validation";
 
 const Form = ({
@@ -8,28 +12,35 @@ const Form = ({
   valid,
   form,
   optionsStatus,
+  optionsUsers,
   match: { params: { issueID: id } }
 }) => (
   <form onSubmit={handleSubmit}>
     <div className="form-horizontal">
       <Field
         name="title"
-        label="title"
+        label="заголовок"
         component={RenderField}
         type="text"
         validate={[required]}
       />
       <Field
         name="status"
-        label="status"
+        label="статус"
         component={RenderSelect}
         optionsToRender={optionsStatus}
       />
       <Field
+        name="assignee_id"
+        label="исполнитель"
+        component={RenderSelect}
+        optionsToRender={optionsUsers}
+      />
+      <Field
         name="description"
-        label="description"
-        component={RenderField}
-        type="text"
+        label="описание"
+        component={RenderTextareaField}
+        type="textarea"
         validate={[required]}
       />
       <button

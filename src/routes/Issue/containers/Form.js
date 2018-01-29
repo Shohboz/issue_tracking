@@ -5,6 +5,7 @@ import Preloader from "components/Preloader";
 import ErrorPage from "components/ErrorPage";
 import { save } from "redux/issues/actions";
 import { load, reset } from "redux/issue/actions";
+import { loadAll as loadUsers } from "redux/users/actions";
 
 class ReduxForm extends Component {
   onSubmit = data => {
@@ -13,8 +14,14 @@ class ReduxForm extends Component {
   };
 
   componentDidMount() {
-    const { load, reset, match: { params: { issueID: id } } } = this.props;
+    const {
+      load,
+      reset,
+      loadUsers,
+      match: { params: { issueID: id } }
+    } = this.props;
     id ? load(id) : reset();
+    loadUsers();
   }
 
   render() {
@@ -37,9 +44,20 @@ const optionsStatus = [
 
 const mapStateToProps = (state, ownProps) => {
   const {
-    issues: { current: { main: { data: initialValues, isFetching, errors } } }
+    issues: { current: { main: { data: initialValues, isFetching, errors } } },
+    users: { main: { list } }
   } = state;
-  return { ...ownProps, initialValues, isFetching, optionsStatus, errors };
+  const optionsUsers = list.map(x => ({ value: x.id, label: x.name }));
+  return {
+    ...ownProps,
+    initialValues,
+    isFetching,
+    optionsStatus,
+    optionsUsers,
+    errors
+  };
 };
 
-export default connect(mapStateToProps, { save, reset, load })(ReduxForm);
+export default connect(mapStateToProps, { save, reset, load, loadUsers })(
+  ReduxForm
+);
