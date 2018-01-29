@@ -33,19 +33,23 @@ const Form = ({
         type="text"
         validate={[required]}
       />
-      <Field
-        name="pass"
-        label="pass"
-        component={RenderField}
-        type="text"
-        validate={[required]}
-      />
-      <Field
-        name="role"
-        label="role"
-        component={RenderSelect}
-        optionsToRender={optionsRole}
-      />
+      {!id && (
+        <Field
+          name="pass"
+          label="pass"
+          component={RenderField}
+          type="text"
+          validate={[required]}
+        />
+      )}
+      {!id && (
+        <Field
+          name="role"
+          label="role"
+          component={RenderSelect}
+          optionsToRender={optionsRole}
+        />
+      )}
       <Field name="enable" component={RenderEnable} label="enable" />
       <button
         type="submit"

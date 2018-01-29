@@ -21,7 +21,7 @@ export default class API {
   }
 
   static update(data) {
-    const { id, ...res } = data;
+    const { id, role, pass, ...res } = data;
     return fetch(`/api/users/${id}`, {
       credentials: "include",
       method: "PATCH",

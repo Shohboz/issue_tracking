@@ -1,10 +1,14 @@
 import { combineReducers } from "redux";
-import { REQUEST_FAIL, REQUEST_SUCCESS, REQUEST_START } from "./constants";
-import current from "redux/issue/reducers";
+import {
+  REQUEST_FAIL,
+  REQUEST_SUCCESS,
+  REQUEST_START,
+  RESET
+} from "./constants";
 
 const initialState = {
   isFetching: false,
-  list: [],
+  data: null,
   errors: ""
 };
 
@@ -20,7 +24,7 @@ export function main(state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        list: action.payload,
+        data: action.payload,
         lastUpdated: action.receivedAt,
         errors: ""
       };
@@ -32,12 +36,14 @@ export function main(state = initialState, action) {
         errors: action.errors
       };
 
+    case RESET:
+      return initialState;
+
     default:
       return state;
   }
 }
 
 export default combineReducers({
-  main,
-  current
+  main
 });

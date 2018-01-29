@@ -1,3 +1,9 @@
 export const REQUEST_START = "issues/REQUEST_START";
 export const REQUEST_SUCCESS = "issues/REQUEST_SUCCESS";
 export const REQUEST_FAIL = "issues/REQUEST_FAIL";
+export const REQUEST_SAVE = "issues/REQUEST_SAVE";
+export const REQUEST_UPDATE = "issues/REQUEST_UPDATE";
+export const SAVE_COMPLETE = "issues/SAVE_COMPLETE";
+export const UPDATE_COMPLETE = "issues/UPDATE_COMPLETE";
+export const UPDATE_OK = "issues/UPDATE_OK";
+export const SAVE_OK = "issues/SAVE_OK";
