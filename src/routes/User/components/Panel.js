@@ -5,7 +5,11 @@ import { Grid, Panel } from "react-bootstrap";
 export default props => (
   <Grid>
     <Panel>
-      <Panel.Heading>Форма создания пользователя</Panel.Heading>
+      <Panel.Heading>
+        {props.match.params.userID
+          ? "Форма редактирования пользователя"
+          : "Форма создания пользователя"}
+      </Panel.Heading>
       <Panel.Body>
         <Form {...props} />
       </Panel.Body>
