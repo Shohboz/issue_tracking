@@ -10,17 +10,17 @@ export default class API {
 
   static create(data) {
     const url = `/api/issues`;
-    // test request
-    const res = Object.assign({}, data, {
-      meeting_date: (+new Date() / 1000) | 0
-    });
+    const { meeting_date, ...res } = data;
     return fetch(url, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(res)
+      body: JSON.stringify({
+        ...res,
+        meeting_date: (+new Date(meeting_date) / 1000) | 0
+      })
     });
   }
 
