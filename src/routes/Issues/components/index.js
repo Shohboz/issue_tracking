@@ -3,41 +3,55 @@ import { Link } from "react-router-dom";
 import { Panel } from "react-bootstrap";
 import NoItems from "components/EmptyList";
 
-const TableHeader = () => (
+const TableHeader = ({ secondary }) => (
   <thead>
     <tr>
       <th>ID</th>
       <th>Название</th>
       <th>Статус</th>
-      <th>Исполнитель</th>
-      <th>Автор</th>
+      {!secondary && <th>Исполнитель</th>}
+      {!secondary && <th>Автор</th>}
       <th>Дата создания</th>
     </tr>
   </thead>
 );
 
-const Item = ({ id, title, created, assignee_id, reporter_id, status }) => (
-  <tr key={id}>
+const Item = ({
+  secondary,
+  id,
+  title,
+  created,
+  assignee_id,
+  reporter_id,
+  status
+}) => (
+  <tr>
     <td>{id}</td>
     <td>
       <Link to={`/issues/${id}`}>{title}</Link>
     </td>
     <td>{status}</td>
-    <td>{assignee_id}</td>
-    <td>{reporter_id}</td>
+    {!secondary && <td>{assignee_id}</td>}
+    {!secondary && <td>{reporter_id}</td>}
     <td>{created && new Date(created * 1000).toLocaleDateString()}</td>
   </tr>
 );
 
-const TableBody = ({ items }) => <tbody>{items.map(Item)}</tbody>;
+const TableBody = ({ items, secondary }) => (
+  <tbody>
+    {items.map((item, idx) => (
+      <Item secondary={secondary} key={idx} {...item} />
+    ))}
+  </tbody>
+);
 
-export default ({ items }) => (
+export default ({ items, secondary }) => (
   <Panel.Body>
     <table className="table table-striped">
       {items.length ? (
         [
-          <TableHeader key="issue-header" />,
-          <TableBody items={items} key="issue-list" />
+          <TableHeader secondary={secondary} key="issue-header" />,
+          <TableBody secondary={secondary} items={items} key="issue-list" />
         ]
       ) : (
         <NoItems />
