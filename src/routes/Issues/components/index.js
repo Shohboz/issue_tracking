@@ -12,30 +12,20 @@ const TableHeader = () => (
       <th>Исполнитель</th>
       <th>Автор</th>
       <th>Дата создания</th>
-      <th>Действия</th>
     </tr>
   </thead>
-);
-
-const EditButton = ({ id }) => (
-  <Link to={`/issues/${id}`}>
-    <div className="btn btn-default">
-      <i className="glyphicon glyphicon-pencil" />
-    </div>
-  </Link>
 );
 
 const Item = ({ id, title, created, assignee_id, reporter_id, status }) => (
   <tr key={id}>
     <td>{id}</td>
-    <td>{title}</td>
+    <td>
+      <Link to={`/issues/${id}`}>{title}</Link>
+    </td>
     <td>{status}</td>
     <td>{assignee_id}</td>
     <td>{reporter_id}</td>
     <td>{created && new Date(created * 1000).toLocaleDateString()}</td>
-    <td>
-      <EditButton id={id} />
-    </td>
   </tr>
 );
 

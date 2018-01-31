@@ -16,25 +16,16 @@ const TableHeader = () => (
   </thead>
 );
 
-const EditButton = ({ id }) => (
-  <Link to={`/users/${id}`}>
-    <div className="btn btn-default">
-      <i className="glyphicon glyphicon-pencil" />
-    </div>
-  </Link>
-);
-
 const Item = ({ id, name, login, email, enable, role }) => (
   <tr>
     <td>{id}</td>
-    <td>{name}</td>
+    <td>
+      <Link to={`/users/${id}`}>{name}</Link>
+    </td>
     <td>{login}</td>
     <td>{email}</td>
     <td>{`${enable}`}</td>
     <td>{role}</td>
-    <td>
-      <EditButton id={id} />
-    </td>
   </tr>
 );
 
