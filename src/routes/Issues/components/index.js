@@ -25,13 +25,13 @@ const EditButton = ({ id }) => (
   </Link>
 );
 
-const Item = ({ id, name, created, assignee, reporter, status }) => (
+const Item = ({ id, title, created, assignee_id, reporter_id, status }) => (
   <tr key={id}>
     <td>{id}</td>
-    <td>{name}</td>
+    <td>{title}</td>
     <td>{status}</td>
-    <td>{assignee}</td>
-    <td>{reporter}</td>
+    <td>{assignee_id}</td>
+    <td>{reporter_id}</td>
     <td>{created && new Date(created * 1000).toLocaleDateString()}</td>
     <td>
       <EditButton id={id} />

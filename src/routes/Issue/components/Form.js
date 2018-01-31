@@ -13,6 +13,8 @@ const Form = ({
   form,
   optionsStatus,
   optionsUsers,
+  optionsProjects,
+  optionsDepartments,
   match: { params: { issueID: id } }
 }) => (
   <form onSubmit={handleSubmit}>
@@ -35,6 +37,18 @@ const Form = ({
         label="исполнитель"
         component={RenderSelect}
         optionsToRender={optionsUsers}
+      />
+      <Field
+        name="project_id"
+        label="проект"
+        component={RenderSelect}
+        optionsToRender={optionsProjects}
+      />
+      <Field
+        name="department_id"
+        label="отдел"
+        component={RenderSelect}
+        optionsToRender={optionsDepartments}
       />
       <Field
         name="description"

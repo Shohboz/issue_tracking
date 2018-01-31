@@ -56,9 +56,8 @@ export function create(data) {
       )
       .then(response => {
         if (response.ok) {
-          response.json &&
-            response.json.id &&
-            history.push(`/users/${response.json.id}`);
+          response.json && response.json.id && history.push("/users/");
+          // history.push(`/users/${response.json.id}`);
           createNotification(dispatch, {
             type: SUCCESS,
             text: `Пользователь #${response.json.id} успешно создан`

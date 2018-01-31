@@ -8,6 +8,7 @@ import { Search as PanelHeader } from "components/Panel";
 import withPanel from "components/List";
 import { withLoader } from "components/HOC";
 import Items from "../components";
+import { withNames } from "redux/selectors";
 
 const { withPaginate, withFilter } = enhancements;
 
@@ -25,13 +26,14 @@ const PaginatedList = ({ items }) => [
   <List items={items} uniqueKey={"issues"} key="issues" />
 ];
 
-const mapStateToProps = ({
-  issues: { main: { isFetching, errors, list } }
-}) => ({
-  errors,
-  list,
-  isFetching
-});
+const mapStateToProps = state => {
+  const { issues: { main: { isFetching, errors } } } = state;
+  return {
+    errors,
+    list: withNames(state),
+    isFetching
+  };
+};
 
 export default withLoader(
   withPanel(PaginatedList)({ title: "Список вопросов" })

@@ -14,21 +14,21 @@ const Form = ({
     <div className="form-horizontal">
       <Field
         name="name"
-        label="name"
+        label="Имя"
         component={RenderField}
         type="text"
         validate={[required]}
       />
       <Field
         name="login"
-        label="login"
+        label="Логин"
         component={RenderField}
         type="text"
         validate={[required]}
       />
       <Field
         name="email"
-        label="email"
+        label="Email"
         component={RenderField}
         type="text"
         validate={[required]}
@@ -36,7 +36,7 @@ const Form = ({
       {!id && (
         <Field
           name="pass"
-          label="pass"
+          label="Пароль"
           component={RenderField}
           type="text"
           validate={[required]}
@@ -45,12 +45,12 @@ const Form = ({
       {!id && (
         <Field
           name="role"
-          label="role"
+          label="Роль"
           component={RenderSelect}
           optionsToRender={optionsRole}
         />
       )}
-      <Field name="enable" component={RenderEnable} label="enable" />
+      <Field name="enable" component={RenderEnable} label="Включен" />
       <button
         type="submit"
         className="btn btn-default pull-right"

@@ -10,18 +10,22 @@ export default class API {
 
   static create(data) {
     const url = `/api/issues`;
+    // test request
+    const res = Object.assign({}, data, {
+      meeting_date: (+new Date() / 1000) | 0
+    });
     return fetch(url, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(res)
     });
   }
 
   static update(data) {
-    const { id, ...res } = data;
+    const { id, status } = data;
     return fetch(`/api/issues/${id}`, {
       credentials: "include",
       method: "PATCH",
@@ -29,7 +33,7 @@ export default class API {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(res)
+      body: JSON.stringify({ status })
     });
   }
 }

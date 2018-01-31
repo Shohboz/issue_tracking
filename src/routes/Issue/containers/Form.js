@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Form from "../components/Form";
+import EditForm from "../components/EditForm";
 import Preloader from "components/Preloader";
 import ErrorPage from "components/ErrorPage";
 import { save } from "redux/issues/actions";
 import { load, reset } from "redux/issue/actions";
-import { loadAll as loadUsers } from "redux/users/actions";
+import { loadAll as loadProjects } from "redux/projects/actions";
+import { loadAll as loadDepartments } from "redux/departments/actions";
+import {
+  toRenderListUsers,
+  toRenderListProjects,
+  toRenderListDepartments
+} from "redux/selectors";
 
 class ReduxForm extends Component {
   onSubmit = data => {
@@ -17,19 +24,32 @@ class ReduxForm extends Component {
     const {
       load,
       reset,
-      loadUsers,
+      loadDepartments,
+      loadProjects,
       match: { params: { issueID: id } }
     } = this.props;
-    id ? load(id) : reset();
-    loadUsers();
+    if (!id) {
+      reset();
+      loadDepartments();
+      loadProjects();
+    } else {
+      load(id);
+    }
   }
 
   render() {
-    const { isFetching, errors } = this.props;
+    const {
+      isFetching,
+      errors,
+      match: { params: { issueID: id } }
+    } = this.props;
     return (
       <div>
         {isFetching && <Preloader />}
-        {!isFetching && <Form {...this.props} onSubmit={this.onSubmit} />}
+        {!isFetching &&
+          id && <EditForm {...this.props} onSubmit={this.onSubmit} />}
+        {!isFetching &&
+          !id && <Form {...this.props} onSubmit={this.onSubmit} />}
         {errors && <ErrorPage errors={errors} />}
       </div>
     );
@@ -44,20 +64,24 @@ const optionsStatus = [
 
 const mapStateToProps = (state, ownProps) => {
   const {
-    issues: { current: { main: { data: initialValues, isFetching, errors } } },
-    users: { main: { list } }
+    issues: { current: { main: { data: initialValues, isFetching, errors } } }
   } = state;
-  const optionsUsers = list.map(x => ({ value: x.id, label: x.name }));
   return {
     ...ownProps,
     initialValues,
     isFetching,
     optionsStatus,
-    optionsUsers,
+    optionsUsers: toRenderListUsers(state),
+    optionsProjects: toRenderListProjects(state),
+    optionsDepartments: toRenderListDepartments(state),
     errors
   };
 };
 
-export default connect(mapStateToProps, { save, reset, load, loadUsers })(
-  ReduxForm
-);
+export default connect(mapStateToProps, {
+  save,
+  reset,
+  load,
+  loadProjects,
+  loadDepartments
+})(ReduxForm);

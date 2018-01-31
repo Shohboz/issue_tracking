@@ -7,12 +7,10 @@ import Projects from "routes/Projects";
 import Users from "routes/Users";
 import Departments from "routes/Departments";
 import Department from "routes/Department";
-import IssueForm from "routes/Issue/components/Panel";
-import Issues from "routes/Issues";
 import ProjectForm from "routes/Project/components/Panel";
 import UserForm from "routes/User/components/Panel";
 import DepartmentForm from "routes/Department/components/Panel";
-// import NotFound from "components/NotFound";
+import Issues from "routes/Issues/routes";
 
 export default (
   <Layout>
@@ -23,13 +21,7 @@ export default (
         path={`/projects/:projectID`}
         component={withRouter(Project)}
       />
-      <Route exact path={"/issues/new"} component={withRouter(IssueForm)} />
-      <Route
-        exact
-        path={`/issues/:issueID`}
-        component={withRouter(IssueForm)}
-      />
-      <Route exact path={"/issues"} component={Issues} />
+      <Route exact path={`/issues/:issueID?`} component={withRouter(Issues)} />
       <Route exact path={"/projects"} component={Projects} />
       <Route exact path={"/users/new"} component={withRouter(UserForm)} />
       <Route exact path={"/users/:userID"} component={withRouter(UserForm)} />
