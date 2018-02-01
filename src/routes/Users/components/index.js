@@ -3,6 +3,13 @@ import { Panel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import NoItems from "components/EmptyList";
 
+const DisableIcon = () => (
+  <i className="text-danger glyphicon glyphicon-remove" title={"выключен"} />
+);
+const EnableIcon = () => (
+  <i className="text-success glyphicon glyphicon-ok" title={"включен"} />
+);
+
 const TableHeader = () => (
   <thead>
     <tr>
@@ -24,7 +31,7 @@ const Item = ({ id, name, login, email, enable, role }) => (
     </td>
     <td>{login}</td>
     <td>{email}</td>
-    <td>{`${enable}`}</td>
+    <td>{enable ? <EnableIcon /> : <DisableIcon />}</td>
     <td>{role}</td>
   </tr>
 );
