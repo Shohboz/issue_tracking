@@ -12,6 +12,7 @@ const NavItemDropDown = ({ name, title, list }) => (
         {item.name}
       </MenuItem>
     ))}
+    <MenuItem href={`/${name}`}>показать все</MenuItem>
   </NavDropdown>
 );
 

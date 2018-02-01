@@ -15,6 +15,14 @@ export default WrappedComponent => (Wrapper = "div") => ({
       action(params[prop], name);
     }
 
+    componentDidUpdate(prevProps) {
+      const { action, match: { params } } = this.props;
+      const { match: { params: prevParams } } = prevProps;
+      if (prevParams[prop] !== params[prop]) {
+        action(params[prop], name);
+      }
+    }
+
     render() {
       const { errors, list, isFetching } = this.props;
       return (
