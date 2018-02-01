@@ -7,7 +7,7 @@ const loadStart = () => ({
 
 const receiveList = json => ({
   type: REQUEST_SUCCESS,
-  payload: json.list,
+  payload: json,
   receivedAt: Date.now()
 });
 

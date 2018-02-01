@@ -3,7 +3,7 @@ import { REQUEST_FAIL, REQUEST_SUCCESS, REQUEST_START } from "./constants";
 
 const initialState = {
   isFetching: false,
-  list: [],
+  list: {},
   errors: ""
 };
 
