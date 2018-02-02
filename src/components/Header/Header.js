@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { loadAll as load } from "redux/presets/actions";
+import { load as loadAccount } from "redux/account/actions";
 import { MenuItem, NavItem } from "components/Nav";
 
 const NavItemDropDown = ({ name, title, list }) => (
@@ -16,7 +17,14 @@ const NavItemDropDown = ({ name, title, list }) => (
   </NavDropdown>
 );
 
-const Header = ({ items: { projects, departments } }) => (
+const Account = ({ name }) => (
+  <NavDropdown title={name} id="dropdown-account">
+    <MenuItem href="/account/profile">Профиль</MenuItem>
+    <MenuItem href="/account/logout">Выйти</MenuItem>
+  </NavDropdown>
+);
+
+const Header = ({ account, items: { projects, departments } }) => (
   <Navbar fluid={true}>
     <Navbar.Header>
       <Navbar.Brand>
@@ -35,34 +43,32 @@ const Header = ({ items: { projects, departments } }) => (
       <NavItem href={"/users"}>пользователи</NavItem>
       <NavItem href={"/issues"}>вопросы</NavItem>
     </Nav>
-    <Nav pullRight>
-      <NavDropdown title="пользователь" id="dropdown-account">
-        <MenuItem href="/account/setup">Настройки</MenuItem>
-        <MenuItem href="/account/logout">Выйти</MenuItem>
-      </NavDropdown>
-    </Nav>
+    <Nav pullRight>{account && <Account {...account} />}</Nav>
   </Navbar>
 );
 
 class Container extends Component {
   componentDidMount() {
-    const { load } = this.props;
+    const { load, loadAccount } = this.props;
     load();
+    loadAccount();
   }
 
   render() {
-    const { list } = this.props;
-    return <Header items={list} />;
+    const { list, account } = this.props;
+    return <Header items={list} account={account} />;
   }
 }
 
 const mapStateToProps = state => {
   const { presets: { main: { isFetching, errors, list } } } = state;
+  const { account: { main: { data: account } } } = state;
   return {
     errors,
     list,
-    isFetching
+    isFetching,
+    account
   };
 };
 
-export default connect(mapStateToProps, { load })(Container);
+export default connect(mapStateToProps, { load, loadAccount })(Container);

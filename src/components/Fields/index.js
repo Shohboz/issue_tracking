@@ -3,6 +3,7 @@ import RenderSelect from "./RenderSelect";
 import RenderEnable from "./RenderEnable";
 import RenderTextareaField from "./RenderTextareaField";
 import RenderPicker from "./RenderPicker";
+import RenderStaticField from "./RenderStaticField";
 
 export {
   RenderTextareaField,
@@ -10,5 +11,6 @@ export {
   RenderSelect,
   RenderEnable,
   RenderPicker,
+  RenderStaticField,
   RenderField as default
 };

@@ -11,6 +11,7 @@ import ProjectForm from "routes/Project/components/Panel";
 import UserForm from "routes/User/components/Panel";
 import DepartmentForm from "routes/Department/components/Panel";
 import Issues from "routes/Issues/routes";
+import Profile from "routes/Profile";
 
 export default (
   <Layout>
@@ -26,6 +27,7 @@ export default (
       <Route exact path={"/users/new"} component={withRouter(UserForm)} />
       <Route exact path={"/users/:userID"} component={withRouter(UserForm)} />
       <Route exact path={"/users"} component={Users} />
+      <Route exact path={"/account/profile"} component={Profile} />
       <Route exact path={"/departments/new"} component={DepartmentForm} />
       <Route exact path={"/departments/:departmentID"} component={Department} />
       <Route exact path={"/departments"} component={Departments} />
