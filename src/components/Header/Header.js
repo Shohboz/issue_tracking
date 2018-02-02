@@ -27,9 +27,11 @@ const Header = ({ items: { projects, departments } }) => (
       {projects && (
         <NavItemDropDown title="проекты" name="projects" {...projects} />
       )}
+      {!projects && <NavItem href={"/projects"}>проекты</NavItem>}
       {departments && (
         <NavItemDropDown title="отделы" name="departments" {...departments} />
       )}
+      {!departments && <NavItem href={"/departments"}>отделы</NavItem>}
       <NavItem href={"/users"}>пользователи</NavItem>
       <NavItem href={"/issues"}>вопросы</NavItem>
     </Nav>
