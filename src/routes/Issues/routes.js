@@ -3,6 +3,7 @@ import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import IssueForm from "routes/Issue/components/Panel";
+import IssueShow from "routes/Issue/containers/Show";
 import Issues from "routes/Issues";
 import { loadAll as loadUsers } from "redux/users/actions";
 
@@ -19,6 +20,11 @@ class IssuesApp extends Component {
         <Route
           exact
           path={`/issues/:issueID`}
+          component={withRouter(IssueShow)}
+        />
+        <Route
+          exact
+          path={`/issues/:issueID/edit`}
           component={withRouter(IssueForm)}
         />
         <Route exact path={"/issues"} component={Issues} />

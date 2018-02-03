@@ -1,0 +1,9 @@
+export const REQUEST_START = "comments/REQUEST_START";
+export const REQUEST_SUCCESS = "comments/REQUEST_SUCCESS";
+export const REQUEST_FAIL = "comments/REQUEST_FAIL";
+export const REQUEST_SAVE = "comments/REQUEST_SAVE";
+export const REQUEST_UPDATE = "comments/REQUEST_UPDATE";
+export const SAVE_COMPLETE = "comments/SAVE_COMPLETE";
+export const UPDATE_COMPLETE = "comments/UPDATE_COMPLETE";
+export const UPDATE_OK = "comments/UPDATE_OK";
+export const SAVE_OK = "comments/SAVE_OK";

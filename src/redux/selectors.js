@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import { prop, compose, reduce, curry, concat, identity } from "ramda";
 import { Maybe } from "ramda-fantasy";
-import { toRenderList } from "./helpers";
+import { toRenderList, toRenderObject } from "./helpers";
 
 const listSelector = compose(prop("list"), prop("main"));
 const usersSelector = compose(listSelector, prop("users"));
@@ -47,4 +47,14 @@ export const toRenderListProjects = createSelector(
 export const toRenderListDepartments = createSelector(
   departmentsSelector,
   toRenderList
+);
+
+export const toObjectUsers = createSelector(usersSelector, toRenderObject);
+export const toObjectProjects = createSelector(
+  projectsSelector,
+  toRenderObject
+);
+export const toObjectDepartments = createSelector(
+  departmentsSelector,
+  toRenderObject
 );
