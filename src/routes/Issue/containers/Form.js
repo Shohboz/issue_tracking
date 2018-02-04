@@ -13,6 +13,7 @@ import {
   toRenderListProjects,
   toRenderListDepartments
 } from "redux/selectors";
+import { optionsStatus } from "redux/fixtures";
 
 class ReduxForm extends Component {
   onSubmit = data => {
@@ -55,12 +56,6 @@ class ReduxForm extends Component {
     );
   }
 }
-
-const optionsStatus = [
-  { value: "open", label: "open" },
-  { value: "closed", label: "closed" },
-  { value: "urgent", label: "urgent" }
-];
 
 const mapStateToProps = (state, ownProps) => {
   const {

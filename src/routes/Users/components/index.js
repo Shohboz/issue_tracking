@@ -42,15 +42,17 @@ const TableBody = ({ items }) => (
 
 export default ({ items }) => (
   <Panel.Body>
-    <table className="table table-striped">
-      {items.length ? (
-        [
-          <TableHeader key="users-header" />,
-          <TableBody items={items} key="users-list" />
-        ]
-      ) : (
-        <NoItems />
-      )}
-    </table>
+    <div className="table-responsive">
+      <table className="table table-striped">
+        {items.length ? (
+          [
+            <TableHeader key="users-header" />,
+            <TableBody items={items} key="users-list" />
+          ]
+        ) : (
+          <NoItems />
+        )}
+      </table>
+    </div>
   </Panel.Body>
 );

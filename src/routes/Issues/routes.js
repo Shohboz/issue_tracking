@@ -7,6 +7,8 @@ import IssueShow from "routes/Issue/containers/Show";
 import Issues from "routes/Issues";
 import { loadAll as loadUsers } from "redux/users/actions";
 
+import AdvancedSearch from "routes/Issues/containers/Search";
+
 class IssuesApp extends Component {
   componentDidMount() {
     const { loadUsers } = this.props;
@@ -17,6 +19,7 @@ class IssuesApp extends Component {
     return (
       <Switch>
         <Route exact path={"/issues/new"} component={withRouter(IssueForm)} />
+        <Route exact path={"/issues/search"} component={AdvancedSearch} />
         <Route
           exact
           path={`/issues/:issueID`}

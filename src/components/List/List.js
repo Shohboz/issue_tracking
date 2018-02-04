@@ -1,9 +1,9 @@
 import React from "react";
 import { Panel } from "react-bootstrap";
 
-export default WrappedComponent => ({ title }) => ({ items }) => (
+export default WrappedComponent => ({ title }) => props => (
   <Panel>
     <Panel.Heading>{title}</Panel.Heading>
-    <WrappedComponent items={items} />
+    <WrappedComponent {...props} />
   </Panel>
 );

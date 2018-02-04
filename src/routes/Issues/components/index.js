@@ -45,17 +45,19 @@ const TableBody = ({ items, secondary }) => (
   </tbody>
 );
 
-export default ({ items, secondary }) => (
+export default ({ items, secondary, isFetching }) => (
   <Panel.Body>
-    <table className="table table-striped">
-      {items.length ? (
-        [
-          <TableHeader secondary={secondary} key="issue-header" />,
-          <TableBody secondary={secondary} items={items} key="issue-list" />
-        ]
-      ) : (
-        <NoItems />
-      )}
-    </table>
+    <div className="table-responsive">
+      <table className="table table-striped">
+        {items.length ? (
+          [
+            <TableHeader secondary={secondary} key="issue-header" />,
+            <TableBody secondary={secondary} items={items} key="issue-list" />
+          ]
+        ) : (
+          <NoItems />
+        )}
+      </table>
+    </div>
   </Panel.Body>
 );

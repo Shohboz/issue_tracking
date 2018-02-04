@@ -15,6 +15,7 @@ class Search extends Component {
   };
 
   render() {
+    const { SearchExtension } = this.props;
     return (
       <div className="row">
         <div className="col-sm-6 search-filter">
@@ -38,6 +39,7 @@ class Search extends Component {
             </span>
           </div>
         </div>
+        {SearchExtension && <SearchExtension />}
       </div>
     );
   }

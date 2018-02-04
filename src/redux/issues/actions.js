@@ -104,3 +104,28 @@ export function update(data) {
       .catch(errors => dispatch(receiveFail(errors)));
   };
 }
+
+export function search(data) {
+  return dispatch => {
+    dispatch(loadStart());
+    return API.search(data)
+      .then(response =>
+        response.json().then(json => ({
+          ok: response.ok,
+          status: response.status,
+          json
+        }))
+      )
+      .then(response => {
+        if (response.ok) {
+          return dispatch(receiveList(response.json));
+        } else {
+          return createNotification(dispatch, {
+            type: FAIL,
+            text: "Поиск завершился ошибкой"
+          });
+        }
+      })
+      .catch(errors => dispatch(receiveFail(errors)));
+  };
+}

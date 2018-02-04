@@ -9,10 +9,21 @@ import withPanel from "components/List";
 import { withLoader } from "components/HOC";
 import Items from "../components";
 import { withNames } from "redux/selectors";
+import { Link } from "react-router-dom";
 
 const { withPaginate, withFilter } = enhancements;
 
-const List = compose(withFilter(), withPaginate({ size: 10 })(Footer))(Items);
+const List = compose(withFilter(), withPaginate({ size: 15 })(Footer))(Items);
+
+const AdvancedSearch = () => (
+  <div className="col-sm-5">
+    <Link to={`/issues/search`}>
+      <button className="btn btn-default" title={"Расширенный поиск"}>
+        <i className="glyphicon glyphicon-search" />
+      </button>
+    </Link>
+  </div>
+);
 
 const PaginatedList = ({ items }) => [
   <PanelHeader
@@ -22,6 +33,7 @@ const PaginatedList = ({ items }) => [
     placeholder={"Поиск по названию вопроса"}
     title={"Добавить вопрос"}
     link={"/issues/new"}
+    SearchExtension={AdvancedSearch}
   />,
   <List items={items} uniqueKey={"issues"} key="issues" />
 ];

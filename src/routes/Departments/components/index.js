@@ -26,15 +26,17 @@ const TableBody = ({ items }) => <tbody>{items.map(Item)}</tbody>;
 
 export default ({ items }) => (
   <Panel.Body>
-    <table className="table table-striped">
-      {items.length ? (
-        [
-          <TableHeader key="projects-header" />,
-          <TableBody items={items} key="projects-list" />
-        ]
-      ) : (
-        <NoItems />
-      )}
-    </table>
+    <div className="table-responsive">
+      <table className="table table-striped">
+        {items.length ? (
+          [
+            <TableHeader key="projects-header" />,
+            <TableBody items={items} key="projects-list" />
+          ]
+        ) : (
+          <NoItems />
+        )}
+      </table>
+    </div>
   </Panel.Body>
 );

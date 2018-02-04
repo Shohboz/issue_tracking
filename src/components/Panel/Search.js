@@ -14,13 +14,21 @@ const CreateButton = ({ title, link }) => (
   </Link>
 );
 
-export default ({ searchBy, uniqueKey, placeholder, title, link }) => (
+export default ({
+  searchBy,
+  uniqueKey,
+  placeholder,
+  title,
+  link,
+  SearchExtension
+}) => (
   <Panel.Body>
     <CreateButton title={title} link={link} />
     <Filter
       uniqueKey={uniqueKey}
       searchBy={searchBy}
       placeholder={placeholder}
+      SearchExtension={SearchExtension}
     />
   </Panel.Body>
 );

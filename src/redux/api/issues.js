@@ -1,4 +1,5 @@
 import fetch from "isomorphic-fetch";
+import { jsonToQueryString } from "redux/helpers";
 
 export default class API {
   static get(issueID = "") {
@@ -21,6 +22,19 @@ export default class API {
         ...res,
         meeting_date: (+new Date(meeting_date) / 1000) | 0
       })
+    });
+  }
+
+  static search(data) {
+    const { meeting_date, ...res } = data;
+
+    // const meeting_date_start =
+    //   meeting_date && (+new Date(meeting_date) / 1000) | 0;
+    const url = `/api/issues${jsonToQueryString({
+      ...res
+    })}`;
+    return fetch(url, {
+      credentials: "include"
     });
   }
 

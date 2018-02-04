@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Preloader from "components/Preloader";
-import ErrorPage from "components/ErrorPage";
 
 export default WrappedComponent => (Wrapper = "div") => ({
   action,
@@ -24,13 +22,10 @@ export default WrappedComponent => (Wrapper = "div") => ({
     }
 
     render() {
-      const { errors, list, isFetching } = this.props;
+      const { list } = this.props;
       return (
         <Wrapper>
-          {isFetching && <Preloader />}
-          {!isFetching &&
-            !errors && <WrappedComponent {...this.props} items={list} />}
-          {errors && <ErrorPage errors={errors} />}
+          <WrappedComponent {...this.props} items={list} />
         </Wrapper>
       );
     }

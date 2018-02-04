@@ -11,7 +11,7 @@ import Items from "../components";
 
 const { withPaginate, withFilter } = enhancements;
 
-const List = compose(withFilter(), withPaginate({ size: 10 })(Footer))(Items);
+const List = compose(withFilter(), withPaginate({ size: 15 })(Footer))(Items);
 
 const PaginatedList = ({ items }) => [
   <PanelHeader
