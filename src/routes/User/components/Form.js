@@ -48,9 +48,15 @@ const Form = ({
           label="Роль"
           component={RenderSelect}
           optionsToRender={optionsRole}
+          validate={[required]}
         />
       )}
-      <Field name="enable" component={RenderEnable} label="Включен" />
+      <Field
+        name="enable"
+        component={RenderEnable}
+        label="Включен"
+        validate={[required]}
+      />
       <button
         type="submit"
         className="btn btn-default pull-right"

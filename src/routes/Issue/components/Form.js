@@ -53,31 +53,34 @@ class Form extends Component {
             label="Статус"
             component={RenderSelect}
             optionsToRender={optionsStatus}
+            validate={[required]}
           />
           <Field
             name="assignee_id"
             label="Исполнитель"
             component={RenderSelect}
             optionsToRender={optionsUsers}
+            validate={[required]}
           />
           <Field
             name="project_id"
             label="Проект"
             component={RenderSelect}
             optionsToRender={optionsProjects}
+            validate={[required]}
           />
           <Field
             name="department_id"
             label="Отдел"
             component={RenderSelect}
             optionsToRender={optionsDepartments}
+            validate={[required]}
           />
           <Field
             name="description"
             label="Описание"
             component={RenderTextareaField}
             type="textarea"
-            validate={[required]}
           />
           <button
             type="submit"
