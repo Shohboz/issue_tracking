@@ -24,11 +24,13 @@
     "react-bootstrap-date-picker": "github:mixxt/react-bootstrap-date-picker"
   },
   "scripts": {
-    "build-css": "node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles/ -o src/styles/",
-    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles/ -o src/styles --watch --recursive",
+    "build-css":
+      "node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles/ -o src/styles/",
+    "watch-css":
+      "npm run build-css && node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles/ -o src/styles --watch --recursive",
     "start-js": "react-scripts start",
     "start": "cross-env NODE_PATH=src npm-run-all -p watch-css start-js",
-    "build": "react-scripts build",
+    "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "dist": "cross-env NODE_PATH=src npm run build && node ./scripts/dist"
