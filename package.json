@@ -10,6 +10,7 @@
     "ramda-fantasy": "^0.8.0",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.0",
+    "react-bootstrap-date-picker": "github:mixxt/react-bootstrap-date-picker",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
@@ -20,14 +21,11 @@
     "redux-form": "^7.2.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "reselect": "^3.0.1",
-    "react-bootstrap-date-picker": "github:mixxt/react-bootstrap-date-picker"
+    "reselect": "^3.0.1"
   },
   "scripts": {
-    "build-css":
-      "node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles/ -o src/styles/",
-    "watch-css":
-      "npm run build-css && node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles/ -o src/styles --watch --recursive",
+    "build-css": "node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles/ -o src/styles/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles/ -o src/styles --watch --recursive",
     "start-js": "react-scripts start",
     "start": "cross-env NODE_PATH=src npm-run-all -p watch-css start-js",
     "build": "cross-env NODE_PATH=src react-scripts build",

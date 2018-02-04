@@ -20,7 +20,7 @@ const NavItemDropDown = ({ name, title, list }) => (
 const Account = ({ name }) => (
   <NavDropdown title={name} id="dropdown-account">
     <MenuItem href="/account/profile">Профиль</MenuItem>
-    <MenuItem href="/account/logout">Выйти</MenuItem>
+    {/*<MenuItem href="/account/logout">Выйти</MenuItem>*/ ""}
   </NavDropdown>
 );
 

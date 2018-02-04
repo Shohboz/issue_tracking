@@ -10,11 +10,16 @@ import { Col } from "react-bootstrap";
 
 class Form extends Component {
   state = {
-    date: null
+    meeting_date_start: null,
+    created_start: null
   };
 
-  onChangeDate = (d, value, formattedValue) => {
-    this.setState({ date: value });
+  onChangeMeetingDate = (d, value, formattedValue) => {
+    this.setState({ meeting_date_start: value });
+  };
+
+  onChangeCreatedDate = (d, value, formattedValue) => {
+    this.setState({ created_start: value });
   };
 
   render() {
@@ -48,8 +53,8 @@ class Form extends Component {
                   name="meeting_date_start"
                   label="Дата встречи"
                   type="text"
-                  date={this.state.date}
-                  onChange={this.onChangeDate}
+                  date={this.state.meeting_date_start}
+                  onChange={this.onChangeMeetingDate}
                   component={RenderPicker}
                 />
               </Col>
@@ -58,8 +63,8 @@ class Form extends Component {
                   name="created_start"
                   label="Дата создания"
                   type="text"
-                  date={this.state.date}
-                  onChange={this.onChangeDate}
+                  date={this.state.created_start}
+                  onChange={this.onChangeCreatedDate}
                   component={RenderPicker}
                 />
               </Col>

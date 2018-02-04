@@ -17,3 +17,5 @@ export const jsonToQueryString = json =>
   Object.keys(json)
     .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(json[key]))
     .join("&");
+
+export const toUnixTimestamp = x => x && (+new Date(x) / 1000) | 0;
