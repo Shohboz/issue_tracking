@@ -19,3 +19,8 @@ export const jsonToQueryString = json =>
     .join("&");
 
 export const toUnixTimestamp = x => x && (+new Date(x) / 1000) | 0;
+
+export const getDate = d => x => {
+  const _ = new Date(x);
+  return x && _.setDate(_.getDate() + d);
+};

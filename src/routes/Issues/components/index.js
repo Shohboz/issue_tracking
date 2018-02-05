@@ -11,6 +11,7 @@ const TableHeader = ({ secondary }) => (
       <th>Статус</th>
       {!secondary && <th>Исполнитель</th>}
       {!secondary && <th>Автор</th>}
+      <th>Дата совещания</th>
       <th>Дата создания</th>
     </tr>
   </thead>
@@ -21,6 +22,7 @@ const Item = ({
   id,
   title,
   created,
+  meeting_date,
   assignee_id,
   reporter_id,
   status
@@ -33,6 +35,10 @@ const Item = ({
     <td>{status}</td>
     {!secondary && <td>{assignee_id}</td>}
     {!secondary && <td>{reporter_id}</td>}
+    <td>
+      {(meeting_date && new Date(meeting_date * 1000).toLocaleDateString()) ||
+        "-"}
+    </td>
     <td>{created && new Date(created * 1000).toLocaleDateString()}</td>
   </tr>
 );

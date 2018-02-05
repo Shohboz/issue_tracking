@@ -1,5 +1,5 @@
 import fetch from "isomorphic-fetch";
-import { jsonToQueryString, toUnixTimestamp } from "redux/helpers";
+import { jsonToQueryString, toUnixTimestamp, getDate } from "redux/helpers";
 import { filter } from "ramda";
 
 export default class API {
@@ -37,10 +37,11 @@ export default class API {
       meeting_date_stop,
       ...res
     } = data;
+
     const dates = filter(Boolean, {
       meeting_date_start: toUnixTimestamp(meeting_date_start),
-      created_start: toUnixTimestamp(created_start),
-      meeting_date_stop: toUnixTimestamp(meeting_date_stop),
+      created_start: toUnixTimestamp(getDate(-1)(created_start)),
+      meeting_date_stop: toUnixTimestamp(getDate(1)(meeting_date_stop)),
       created_stop: toUnixTimestamp(created_stop)
     });
 
