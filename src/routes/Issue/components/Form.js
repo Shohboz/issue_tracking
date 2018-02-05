@@ -41,7 +41,7 @@ class Form extends Component {
           />
           <Field
             name="meeting_date"
-            label="Дата встречи"
+            label="Дата совещания"
             type="text"
             date={this.state.date}
             onChange={this.onChangeDate}
