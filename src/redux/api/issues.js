@@ -13,6 +13,9 @@ export default class API {
   static create(data) {
     const url = `/api/issues`;
     const { meeting_date, ...res } = data;
+    const dates = filter(Boolean, {
+      meeting_date: toUnixTimestamp(meeting_date)
+    });
     return fetch(url, {
       method: "POST",
       credentials: "include",
@@ -21,7 +24,7 @@ export default class API {
       },
       body: JSON.stringify({
         ...res,
-        meeting_date: (+new Date(meeting_date) / 1000) | 0
+        ...dates
       })
     });
   }
