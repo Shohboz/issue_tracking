@@ -58,7 +58,7 @@ export function create(data) {
         if (response.ok) {
           response.json &&
             response.json.id &&
-            history.push(`/departments/${response.json.id}`);
+            history.push(`/departments`);
           createNotification(dispatch, {
             type: SUCCESS,
             text: `Отдел #${response.json.id} успешно создан`
