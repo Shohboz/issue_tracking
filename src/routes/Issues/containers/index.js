@@ -28,7 +28,7 @@ const AdvancedSearch = () => (
 const PaginatedList = ({ items }) => [
   <PanelHeader
     key="header"
-    searchBy={["name"]}
+    searchBy={["name", "title"]}
     uniqueKey="issues"
     placeholder={"Поиск по названию вопроса"}
     title={"Добавить вопрос"}
