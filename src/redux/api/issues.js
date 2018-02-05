@@ -30,10 +30,18 @@ export default class API {
   }
 
   static search(data) {
-    const { meeting_date_start, created_start, ...res } = data;
+    const {
+      meeting_date_start,
+      created_start,
+      created_stop,
+      meeting_date_stop,
+      ...res
+    } = data;
     const dates = filter(Boolean, {
       meeting_date_start: toUnixTimestamp(meeting_date_start),
-      created_start: toUnixTimestamp(created_start)
+      created_start: toUnixTimestamp(created_start),
+      meeting_date_stop: toUnixTimestamp(meeting_date_stop),
+      created_stop: toUnixTimestamp(created_stop)
     });
 
     const url = `/api/issues${jsonToQueryString({

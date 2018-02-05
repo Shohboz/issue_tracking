@@ -31,7 +31,7 @@ export default (
       <Route exact path={"/departments/new"} component={DepartmentForm} />
       <Route exact path={"/departments/:departmentID"} component={Department} />
       <Route exact path={"/departments"} component={Departments} />
-      <Route path={"*"} component={Projects} />
+      <Route path={"*"} component={withRouter(Issues)} />
     </Switch>
   </Layout>
 );

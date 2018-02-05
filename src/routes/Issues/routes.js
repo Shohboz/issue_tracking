@@ -31,6 +31,7 @@ class IssuesApp extends Component {
           component={withRouter(IssueForm)}
         />
         <Route exact path={"/issues"} component={Issues} />
+        <Route path={"*"} component={AdvancedSearch} />
       </Switch>
     );
   }

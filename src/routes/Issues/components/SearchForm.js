@@ -11,7 +11,9 @@ import { Col } from "react-bootstrap";
 class Form extends Component {
   state = {
     meeting_date_start: null,
-    created_start: null
+    created_start: null,
+    meeting_date_stop: null,
+    created_stop: null
   };
 
   onChangeMeetingDate = (d, value, formattedValue) => {
@@ -20,6 +22,14 @@ class Form extends Component {
 
   onChangeCreatedDate = (d, value, formattedValue) => {
     this.setState({ created_start: value });
+  };
+
+  onChangeMeetingStopDate = (d, value, formattedValue) => {
+    this.setState({ meeting_date_stop: value });
+  };
+
+  onChangeCreatedStopDate = (d, value, formattedValue) => {
+    this.setState({ created_stop: value });
   };
 
   render() {
@@ -38,7 +48,7 @@ class Form extends Component {
         <form onSubmit={handleSubmit}>
           <Col xs={12} md={12}>
             <div className="row">
-              <Col xs={12} md={12}>
+              <Col xs={12} md={10}>
                 <Field
                   name="text"
                   label="Полнотекстовый поиск"
@@ -46,12 +56,20 @@ class Form extends Component {
                   type="text"
                 />
               </Col>
+              <Col xs={12} md={2}>
+                <Field
+                  name="status"
+                  label="Статус"
+                  component={RenderSelect}
+                  optionsToRender={optionsStatus}
+                />
+              </Col>
             </div>
             <div className="row">
               <Col xs={12} md={3}>
                 <Field
                   name="meeting_date_start"
-                  label="Дата встречи"
+                  label="Дата совещания с"
                   type="text"
                   date={this.state.meeting_date_start}
                   onChange={this.onChangeMeetingDate}
@@ -60,8 +78,18 @@ class Form extends Component {
               </Col>
               <Col xs={12} md={3}>
                 <Field
+                  name="meeting_date_stop"
+                  label="Дата совещания до"
+                  type="text"
+                  date={this.state.meeting_date_stop}
+                  onChange={this.onChangeMeetingStopDate}
+                  component={RenderPicker}
+                />
+              </Col>
+              <Col xs={12} md={3}>
+                <Field
                   name="created_start"
-                  label="Дата создания"
+                  label="Дата создания с"
                   type="text"
                   date={this.state.created_start}
                   onChange={this.onChangeCreatedDate}
@@ -70,10 +98,12 @@ class Form extends Component {
               </Col>
               <Col xs={12} md={3}>
                 <Field
-                  name="status"
-                  label="Статус"
-                  component={RenderSelect}
-                  optionsToRender={optionsStatus}
+                  name="created_stop"
+                  label="Дата создания до"
+                  type="text"
+                  date={this.state.created_stop}
+                  onChange={this.onChangeCreatedStopDate}
+                  component={RenderPicker}
                 />
               </Col>
             </div>
