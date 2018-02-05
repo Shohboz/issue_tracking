@@ -8,7 +8,7 @@ const Form = ({ handleSubmit, valid, form }) => (
     <div className="form-horizontal">
       <Field
         name="name"
-        label="name"
+        label="Название"
         component={RenderField}
         type="text"
         validate={[required]}

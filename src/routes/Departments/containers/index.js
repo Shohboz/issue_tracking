@@ -4,7 +4,7 @@ import { withLoader } from "components/HOC";
 import withPanel from "components/List";
 import Items from "../components";
 
-const List = withPanel(Items)({ title: "Список департаментов" });
+const List = withPanel(Items)({ title: "Список отделов" });
 
 const mapStateToProps = ({
   departments: { main: { isFetching, errors, list } }
