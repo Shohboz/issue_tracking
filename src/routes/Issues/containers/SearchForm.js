@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Form from "../components/SearchForm";
 import { search } from "redux/issues/actions";
 import { actions } from "components/ComposableList";
-
 import { loadAll as loadProjects } from "redux/projects/actions";
 import { loadAll as loadDepartments } from "redux/departments/actions";
 import {

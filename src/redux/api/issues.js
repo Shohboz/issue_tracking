@@ -40,8 +40,8 @@ export default class API {
 
     const dates = filter(Boolean, {
       meeting_date_start: toUnixTimestamp(meeting_date_start),
-      created_start: toUnixTimestamp(getDate(-1)(created_start)),
-      meeting_date_stop: toUnixTimestamp(getDate(1)(meeting_date_stop)),
+      created_start: toUnixTimestamp(getDate(-1, created_start)),
+      meeting_date_stop: toUnixTimestamp(getDate(1, meeting_date_stop)),
       created_stop: toUnixTimestamp(created_stop)
     });
 

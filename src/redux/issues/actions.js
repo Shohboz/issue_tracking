@@ -57,7 +57,6 @@ export function create(data) {
       .then(response => {
         if (response.ok) {
           response.json && response.json.id && history.push("/issues");
-          // history.push(`/issues/${response.json.id}`);
           createNotification(dispatch, {
             type: SUCCESS,
             text: `Вопрос #${response.json.id} успешно создан`
