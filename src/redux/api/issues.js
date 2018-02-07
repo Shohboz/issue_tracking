@@ -45,10 +45,12 @@ export default class API {
       created_stop: toUnixTimestamp(created_stop)
     });
 
-    const url = `/api/issues${jsonToQueryString({
+    const _ = filter(Boolean, {
       ...res,
       ...dates
-    })}`;
+    });
+
+    const url = `/api/issues${jsonToQueryString(_)}`;
     return fetch(url, {
       credentials: "include"
     });

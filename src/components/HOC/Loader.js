@@ -7,19 +7,26 @@ export default WrappedComponent => (Wrapper = "div") => ({
   action,
   prop,
   mapStateToProps,
-  name
+  name,
+  isDirectParams,
+  internal_name
 }) => {
   class Loader extends Component {
     componentDidMount() {
       const { action, match: { params } } = this.props;
-      action(params[prop], name);
+
+      isDirectParams
+        ? action({ [internal_name]: params[prop] }, name)
+        : action(params[prop], name);
     }
 
     componentDidUpdate(prevProps) {
       const { action, match: { params } } = this.props;
       const { match: { params: prevParams } } = prevProps;
       if (prevParams[prop] !== params[prop]) {
-        action(params[prop], name);
+        isDirectParams
+          ? action({ [internal_name]: params[prop] }, name)
+          : action(params[prop], name);
       }
     }
 

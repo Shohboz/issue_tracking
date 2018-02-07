@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Col } from "react-bootstrap";
-import Issues from "./Issues";
+import Issues from "./IssuesSearch";
 import Departments from "./Departments";
 
 export default ({ match }) => (
