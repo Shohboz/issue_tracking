@@ -1,5 +1,5 @@
 export const optionsStatus = [
-  { value: "open", label: "open" },
-  { value: "closed", label: "closed" },
-  { value: "urgent", label: "urgent" }
+  { value: "open", label: "открыт" },
+  { value: "closed", label: "закрыт" },
+  { value: "urgent", label: "срочный" }
 ];

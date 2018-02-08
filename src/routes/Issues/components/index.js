@@ -27,7 +27,11 @@ const Item = ({
   reporter_id,
   status
 }) => (
-  <tr>
+  <tr
+    className={
+      status === "urgent" ? "danger" : status === "closed" ? "info" : ""
+    }
+  >
     <td>{id}</td>
     <td>
       <Link to={`/issues/${id}`}>{title}</Link>
