@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Panel } from "react-bootstrap";
+import { toLocaleDateString } from "redux/helpers";
 import NoItems from "components/EmptyList";
 
 const TableHeader = ({ secondary }) => (
@@ -39,11 +40,8 @@ const Item = ({
     <td>{status}</td>
     {!secondary && <td>{assignee_id}</td>}
     {!secondary && <td>{reporter_id}</td>}
-    <td>
-      {(meeting_date && new Date(meeting_date * 1000).toLocaleDateString()) ||
-        "-"}
-    </td>
-    <td>{created && new Date(created * 1000).toLocaleDateString()}</td>
+    <td>{toLocaleDateString(meeting_date)}</td>
+    <td>{toLocaleDateString(created)}</td>
   </tr>
 );
 

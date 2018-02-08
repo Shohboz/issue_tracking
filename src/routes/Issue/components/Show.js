@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid, Panel, Col } from "react-bootstrap";
+import { toLocaleDateString } from "redux/helpers";
 import { RenderStaticField } from "components/Fields";
 import AddComment from "routes/Comments/components/AddComment";
 import Comments from "routes/Comments";
@@ -18,20 +19,12 @@ const App = ({
         <Col xs={12} md={6} className="form-horizontal">
           <RenderStaticField value={data.status} name="status" label="Статус" />
           <RenderStaticField
-            value={
-              (data.created &&
-                new Date(data.created * 1000).toLocaleDateString()) ||
-              "-"
-            }
+            value={toLocaleDateString(data.created)}
             name="created"
             label="Создан"
           />
           <RenderStaticField
-            value={
-              (data.meeting_date &&
-                new Date(data.meeting_date * 1000).toLocaleDateString()) ||
-              "-"
-            }
+            value={toLocaleDateString(data.meeting_date)}
             name="meeting_date"
             label="Дата совещания"
           />

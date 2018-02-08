@@ -24,3 +24,6 @@ export const getDate = curry((d, x) => {
   const _ = new Date(x);
   return x && _.setDate(_.getDate() + d);
 });
+
+export const toLocaleDateString = x =>
+  (x && new Date(x * 1000).toLocaleDateString()) || "-";

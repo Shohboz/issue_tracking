@@ -1,9 +1,10 @@
 import React from "react";
+import { toLocaleDateString } from "redux/helpers";
 
 const Comment = ({ comment, user, created }) => (
   <div>
     <p>
-      <strong>{user}</strong> - {new Date(created * 1000).toLocaleDateString()}
+      <strong>{user}</strong> - {toLocaleDateString(created) || "не указано"}
     </p>
     <text>{comment}</text>
     <hr className="hr-text" style={{ marginTop: 0, marginBottom: 10 }} />

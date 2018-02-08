@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Panel } from "react-bootstrap";
+import { toLocaleDateString } from "redux/helpers";
 import NoItems from "components/EmptyList";
 
 const TableHeader = () => (
@@ -19,7 +20,7 @@ const Item = ({ id, name, created }) => (
     <td>
       <Link to={`/projects/${id}`}>{name}</Link>
     </td>
-    <td>{created && new Date(created * 1000).toLocaleDateString()}</td>
+    <td>{toLocaleDateString(created)}</td>
   </tr>
 );
 
