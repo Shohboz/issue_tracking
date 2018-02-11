@@ -4,20 +4,55 @@ import { toLocaleDateString } from "redux/helpers";
 import { RenderStaticField } from "components/Fields";
 import AddComment from "routes/Comments/components/AddComment";
 import Comments from "routes/Comments";
+import EditableString from "components/EditableString";
+import { optionsStatus as optionsToRender } from "redux/fixtures";
+
+const RenderSelectableField = ({
+  input,
+  label,
+  type,
+  issue_id,
+  value,
+  optionsToRender,
+  onSave: save
+}) => (
+  <div>
+    <label className="col-sm-3 control-label" style={{ textAlign: "left" }}>
+      {label}
+    </label>
+    <div className="col-sm-9">
+      <EditableString
+        tagName={"p"}
+        className="form-control-static"
+        value={value}
+        optionsToRender={optionsToRender}
+        onSave={name => save({ id: issue_id, status: name })}
+      />
+    </div>
+  </div>
+);
 
 const App = ({
   match,
   data,
   optionsUsers,
   optionsProjects,
-  optionsDepartments
+  optionsDepartments,
+  save
 }) => (
   <div>
     <Col xs={12} md={12}>
       <hr className="hr-text" data-content={"Подробно"} />
       <div className="row">
         <Col xs={12} md={6} className="form-horizontal">
-          <RenderStaticField value={data.status} name="status" label="Статус" />
+          <RenderSelectableField
+            value={data.status}
+            name="status"
+            issue_id={data.id}
+            label="Статус"
+            optionsToRender={optionsToRender}
+            onSave={save}
+          />
           <RenderStaticField
             value={toLocaleDateString(data.created)}
             name="created"
