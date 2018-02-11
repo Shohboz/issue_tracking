@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Panel } from "react-bootstrap";
-import { toLocaleDateString } from "redux/helpers";
+import { toLocaleDateString, getStatus } from "redux/helpers";
 import NoItems from "components/EmptyList";
 
 const TableHeader = ({ secondary }) => (
@@ -37,7 +37,7 @@ const Item = ({
     <td>
       <Link to={`/issues/${id}`}>{title}</Link>
     </td>
-    <td>{status}</td>
+    <td>{getStatus(status)}</td>
     {!secondary && <td>{assignee_id}</td>}
     {!secondary && <td>{reporter_id}</td>}
     <td>{toLocaleDateString(meeting_date)}</td>
