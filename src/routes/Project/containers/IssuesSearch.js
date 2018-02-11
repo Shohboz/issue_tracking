@@ -3,7 +3,7 @@ import { compose } from "recompose";
 import { enhancements } from "components/ComposableList";
 import { Footer } from "components/Panel";
 import withPanel from "components/List";
-import { withLoader } from "components/HOC";
+import { withSpecialLoader as withLoader } from "components/HOC";
 import Items from "routes/Issues/components";
 import { withNames } from "redux/selectors";
 import PanelHeader from "routes/Issues/containers/SearchForm";
