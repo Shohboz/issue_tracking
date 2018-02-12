@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getStatus } from "redux/helpers";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 
@@ -130,10 +129,10 @@ export default class EditableString extends Component {
   }
 
   renderStaticComponent() {
-    const { tagName: Element, className } = this.props;
+    const { tagName: Element, className, format } = this.props;
     return (
       <Element className={`vlink ${className}`} onClick={this.onClick}>
-        {(this.state.value && getStatus(this.state.value)) || ""}
+        {(this.state.value && format(this.state.value)) || ""}
       </Element>
     );
   }
@@ -157,7 +156,8 @@ export default class EditableString extends Component {
         label: PropTypes.string,
         value: PropTypes.string
       })
-    )
+    ),
+    format: PropTypes.func
   };
 
   static defaultProps = {

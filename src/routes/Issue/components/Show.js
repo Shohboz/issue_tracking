@@ -1,21 +1,23 @@
 import React from "react";
 import { Grid, Panel, Col } from "react-bootstrap";
-import { toLocaleDateString } from "redux/helpers";
+import { toLocaleDateString, getStatus, getPriority } from "redux/helpers";
 import { RenderStaticField } from "components/Fields";
 import AddComment from "routes/Comments/components/AddComment";
 import Comments from "routes/Comments";
 import EditableString from "components/EditableString";
-import { optionsStatus as optionsToRender } from "redux/fixtures";
+import { optionsStatus, optionsPriority } from "redux/fixtures";
 import { nonEmpty } from "redux/validation";
 
 const RenderSelectableField = ({
   input,
   label,
   type,
-  issue_id,
+  id,
   value,
   optionsToRender,
-  onSave: save
+  name,
+  onSave: save,
+  format
 }) => (
   <div>
     <label className="col-sm-3 control-label" style={{ textAlign: "left" }}>
@@ -27,8 +29,9 @@ const RenderSelectableField = ({
         className="form-control-static"
         value={value}
         optionsToRender={optionsToRender}
-        onSave={name => save({ id: issue_id, status: name })}
+        onSave={x => save({ id, [name]: x })}
         validate={[nonEmpty]}
+        format={format}
       />
     </div>
   </div>
@@ -50,10 +53,20 @@ const App = ({
           <RenderSelectableField
             value={data.status}
             name="status"
-            issue_id={data.id}
+            id={data.id}
             label="Статус"
-            optionsToRender={optionsToRender}
+            optionsToRender={optionsStatus}
             onSave={save}
+            format={getStatus}
+          />
+          <RenderSelectableField
+            value={data.priority}
+            name="priority"
+            id={data.id}
+            label="Приоритет"
+            optionsToRender={optionsPriority}
+            onSave={save}
+            format={getPriority}
           />
           <RenderStaticField
             value={toLocaleDateString(data.created)}

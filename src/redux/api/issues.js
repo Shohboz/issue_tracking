@@ -57,7 +57,7 @@ export default class API {
   }
 
   static update(data) {
-    const { id, status } = data;
+    const { id, ...res } = data;
     return fetch(`/api/issues/${id}`, {
       credentials: "include",
       method: "PATCH",
@@ -65,7 +65,7 @@ export default class API {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ status })
+      body: JSON.stringify(res)
     });
   }
 }
