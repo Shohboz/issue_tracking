@@ -1,5 +1,5 @@
 import { map, reduce, curry, prop, find, propEq, compose } from "ramda";
-import { optionsStatus } from "./fixtures";
+import { optionsStatus, optionsPriority } from "./fixtures";
 
 export const toRenderList = map(x => ({ value: x.id, label: x.name }));
 
@@ -29,5 +29,7 @@ export const getDate = curry((d, x) => {
 export const toLocaleDateString = x =>
   (x && new Date(x * 1000).toLocaleDateString()) || "-";
 
-export const getStatus = x =>
-  compose(prop("label"), find(propEq("value", x)))(optionsStatus);
+const getVal = x => compose(prop("label"), find(propEq("value", x)));
+
+export const getStatus = x => getVal(x)(optionsStatus);
+export const getPriority = x => getVal(x)(optionsPriority);
