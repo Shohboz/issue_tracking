@@ -1,41 +1,11 @@
 import React from "react";
 import { Grid, Panel, Col } from "react-bootstrap";
 import { toLocaleDateString, getStatus, getPriority } from "redux/helpers";
-import { RenderStaticField } from "components/Fields";
+import { RenderStaticField, RenderSelectableField } from "components/Fields";
 import AddComment from "routes/Comments/components/AddComment";
 import Comments from "routes/Comments";
-import EditableString from "components/EditableString";
 import { optionsStatus, optionsPriority } from "redux/fixtures";
 import { nonEmpty } from "redux/validation";
-
-const RenderSelectableField = ({
-  input,
-  label,
-  type,
-  id,
-  value,
-  optionsToRender,
-  name,
-  onSave: save,
-  format
-}) => (
-  <div>
-    <label className="col-sm-3 control-label" style={{ textAlign: "left" }}>
-      {label}
-    </label>
-    <div className="col-sm-9">
-      <EditableString
-        tagName={"p"}
-        className="form-control-static"
-        value={value}
-        optionsToRender={optionsToRender}
-        onSave={x => save({ id, [name]: x })}
-        validate={[nonEmpty]}
-        format={format}
-      />
-    </div>
-  </div>
-);
 
 const App = ({
   match,
@@ -58,6 +28,7 @@ const App = ({
             optionsToRender={optionsStatus}
             onSave={save}
             format={getStatus}
+            validate={[nonEmpty]}
           />
           <RenderSelectableField
             value={data.priority}
@@ -67,6 +38,7 @@ const App = ({
             optionsToRender={optionsPriority}
             onSave={save}
             format={getPriority}
+            validate={[nonEmpty]}
           />
           <RenderStaticField
             value={toLocaleDateString(data.created)}
