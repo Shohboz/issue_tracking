@@ -32,7 +32,7 @@ const Item = ({
 }) => (
   <tr
     className={
-      status === "urgent" ? "danger" : status === "closed" ? "info" : ""
+      priority === "highest" ? "danger" : priority === "high" ? "warning" : ""
     }
   >
     <td>{id}</td>
