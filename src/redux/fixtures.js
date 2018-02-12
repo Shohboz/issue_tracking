@@ -7,5 +7,5 @@ export const optionsStatus = [
 export const optionsPriority = [
   { value: "normal", label: "обычный" },
   { value: "high", label: "высокий" },
-  { value: "highest", label: "срочный" }
+  { value: "highest", label: "наивысший" }
 ];
