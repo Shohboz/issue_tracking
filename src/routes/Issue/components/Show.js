@@ -6,6 +6,7 @@ import AddComment from "routes/Comments/components/AddComment";
 import Comments from "routes/Comments";
 import EditableString from "components/EditableString";
 import { optionsStatus as optionsToRender } from "redux/fixtures";
+import { nonEmpty } from "redux/validation";
 
 const RenderSelectableField = ({
   input,
@@ -27,6 +28,7 @@ const RenderSelectableField = ({
         value={value}
         optionsToRender={optionsToRender}
         onSave={name => save({ id: issue_id, status: name })}
+        validate={[nonEmpty]}
       />
     </div>
   </div>
