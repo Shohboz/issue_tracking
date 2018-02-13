@@ -1,4 +1,9 @@
-import { REQUEST_START, REQUEST_SUCCESS, REQUEST_FAIL } from "./constants";
+import {
+  REQUEST_START,
+  REQUEST_SUCCESS,
+  REQUEST_FAIL,
+  CHANGE_CURRENT_PROJECT
+} from "./constants";
 import API from "redux/api/project";
 
 const loadStart = name => ({
@@ -28,3 +33,9 @@ export function load(id, name) {
       .catch(errors => dispatch(receiveFail(errors, name)));
   };
 }
+
+export const changeProject = (id, name) => ({
+  type: CHANGE_CURRENT_PROJECT,
+  payload: id,
+  name
+});

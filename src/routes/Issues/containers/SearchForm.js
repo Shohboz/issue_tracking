@@ -33,10 +33,14 @@ class PanelHeader extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { issues: { main: { isFetching } } } = state;
+  const {
+    projects: { current: { main: { departmentId: department_id } } }
+  } = state;
   const { match } = ownProps;
   return {
     initialValues: {
-      project_id: match && match.params && match.params.projectID
+      project_id: match && match.params && match.params.projectID,
+      department_id
     },
     optionsUsers: toRenderListUsers(state),
     optionsProjects: toRenderListProjects(state),

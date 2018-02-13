@@ -21,7 +21,7 @@ const PaginatedList = ({ items }) => [
     title={"Добавить отдел"}
     link={"/departments/new"}
   />,
-  <List items={items} uniqueKey={"departments"} key="list" />
+  <List items={items} secondary={true} uniqueKey={"departments"} key="list" />
 ];
 
 const mapStateToProps = ({

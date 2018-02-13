@@ -3,6 +3,8 @@ import { Panel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { toLocaleDateString } from "redux/helpers";
 import NoItems from "components/EmptyList";
+import { connect } from "react-redux";
+import { changeProject } from "redux/project/actions";
 
 const TableHeader = () => (
   <thead>
@@ -14,25 +16,41 @@ const TableHeader = () => (
   </thead>
 );
 
-const Item = ({ id, name, created }) => (
-  <tr key={id}>
+const Item = ({ id, name, created, secondary, action }) => (
+  <tr>
     <td>{id}</td>
     <td>
-      <Link to={`/departments/${id}`}>{name}</Link>
+      {secondary && (
+        <a className="vlink" onClick={() => action(id)}>
+          {name}
+        </a>
+      )}
+      {!secondary && <Link to={`/departments/${id}`}>{name}</Link>}
     </td>
     <td>{toLocaleDateString(created)}</td>
   </tr>
 );
-const TableBody = ({ items }) => <tbody>{items.map(Item)}</tbody>;
+const TableBody = ({ items, secondary, action }) => (
+  <tbody>
+    {items.map((item, idx) => (
+      <Item secondary={secondary} key={idx} {...item} action={action} />
+    ))}
+  </tbody>
+);
 
-export default ({ items }) => (
+const Departments = ({ items, secondary, changeProject: action }) => (
   <Panel.Body>
     <div className="table-responsive">
       <table className="table table-striped">
         {items.length ? (
           [
             <TableHeader key="projects-header" />,
-            <TableBody items={items} key="projects-list" />
+            <TableBody
+              items={items}
+              secondary={secondary}
+              action={action}
+              key="projects-list"
+            />
           ]
         ) : (
           <NoItems />
@@ -41,3 +59,5 @@ export default ({ items }) => (
     </div>
   </Panel.Body>
 );
+
+export default connect(null, { changeProject })(Departments);

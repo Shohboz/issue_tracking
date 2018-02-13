@@ -1,11 +1,17 @@
 import { combineReducers } from "redux";
-import { REQUEST_FAIL, REQUEST_SUCCESS, REQUEST_START } from "./constants";
+import {
+  REQUEST_FAIL,
+  REQUEST_SUCCESS,
+  REQUEST_START,
+  CHANGE_CURRENT_PROJECT
+} from "./constants";
 import wrapperReducer from "redux/containers/wrapperReducer";
 
 const initialState = {
   isFetching: false,
   list: [],
-  errors: ""
+  errors: "",
+  departmentId: null
 };
 
 export function main(state = initialState, action) {
@@ -30,6 +36,12 @@ export function main(state = initialState, action) {
         ...state,
         isFetching: false,
         errors: action.errors
+      };
+
+    case CHANGE_CURRENT_PROJECT:
+      return {
+        ...state,
+        departmentId: action.payload
       };
 
     default:
