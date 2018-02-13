@@ -17,16 +17,28 @@ export default class API {
       meeting_date: toUnixTimestamp(meeting_date),
       due_date: toUnixTimestamp(due_date)
     });
+
+    const metadata = JSON.stringify({
+      ...res,
+      ...dates
+    });
+
+    const formData = new FormData();
+    formData.append("metadata", metadata);
+
     return fetch(url, {
       method: "POST",
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        ...res,
-        ...dates
-      })
+      // headers: {
+      //   "Content-Type": "application/json"
+      // },
+      body: formData
+      // body: JSON.stringify({
+      //   metadata: {
+      //     ...res,
+      //     ...dates
+      //   }
+      // })
     });
   }
 
