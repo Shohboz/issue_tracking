@@ -7,4 +7,17 @@ export default class API {
       credentials: "include"
     });
   }
+
+  static update(data) {
+    const { id, ...res } = data;
+    return fetch(`/api/myself`, {
+      credentials: "include",
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(res)
+    });
+  }
 }

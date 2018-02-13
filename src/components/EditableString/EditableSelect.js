@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Select from "react-select";
+import "react-select/dist/react-select.css";
 
 export default class EditableString extends Component {
   state = {
@@ -40,12 +42,12 @@ export default class EditableString extends Component {
     );
   }
 
-  onChange = e => {
-    const { target: { value } } = e;
+  onChange = value => {
+    // onChange = e => {
+    // const { target: { value } } = e;
     const { meta: oldMeta } = this.state;
     const error = this.validate(value);
     const meta = { ...oldMeta, touched: true, error };
-
     this.setState({ value, meta });
   };
 
@@ -92,19 +94,21 @@ export default class EditableString extends Component {
   }
 
   renderEditableComponent() {
-    const { meta: { error, touched } } = this.state;
+    const { value, meta: { error, touched } } = this.state;
+    const { optionsToRender: options } = this.props;
     return (
       <div>
         <div className="input-group">
-          <input
-            className="form-control"
+          <Select
             ref={e => {
               this.input = e;
             }}
-            value={this.state.value}
-            onBlur={this.onBlur}
+            value={value}
             onChange={this.onChange}
-            onKeyDown={this.onKeyDown}
+            onBlur={this.onBlur}
+            options={options}
+            disabled={!!error}
+            simpleValue
           />
           <div className="input-group-btn">
             <div className="btn btn-white btn-sm" onClick={this.cancel}>
@@ -125,10 +129,10 @@ export default class EditableString extends Component {
   }
 
   renderStaticComponent() {
-    const { tagName: Element, className } = this.props;
+    const { tagName: Element, className, format } = this.props;
     return (
       <Element className={`vlink ${className}`} onClick={this.onClick}>
-        {this.state.value}
+        {(this.state.value && format(this.state.value)) || ""}
       </Element>
     );
   }
@@ -143,13 +147,22 @@ export default class EditableString extends Component {
   static propTypes = {
     editable: PropTypes.bool,
     tagName: PropTypes.string,
+    className: PropTypes.string,
     value: PropTypes.string,
     onSave: PropTypes.func,
-    validate: PropTypes.array
+    validate: PropTypes.array,
+    optionsToRender: PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        value: PropTypes.string
+      })
+    ),
+    format: PropTypes.func
   };
 
   static defaultProps = {
     ediatble: false,
+    className: "",
     value: "",
     tagName: "span"
   };

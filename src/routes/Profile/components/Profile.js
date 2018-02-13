@@ -1,11 +1,20 @@
 import React from "react";
-import { RenderStaticField } from "components/Fields";
+import { RenderEditableField } from "components/Fields";
 
-export default ({ name, login, email, role }) => (
+export default ({ name, login, email, onSave }) => (
   <div className="form-horizontal">
-    <RenderStaticField value={name} name="name" label="Имя" />
-    <RenderStaticField value={login} name="login" label="Логин" />
-    <RenderStaticField value={email} name="email" label="Email" />
-    <RenderStaticField value={role} name="role" label="Роль" />
+    <RenderEditableField value={name} name="name" label="Имя" onSave={onSave} />
+    <RenderEditableField
+      value={login}
+      name="login"
+      label="Логин"
+      onSave={onSave}
+    />
+    <RenderEditableField
+      value={email}
+      name="email"
+      label="Email"
+      onSave={onSave}
+    />
   </div>
 );

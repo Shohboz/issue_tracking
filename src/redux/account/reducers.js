@@ -3,7 +3,8 @@ import {
   REQUEST_FAIL,
   REQUEST_SUCCESS,
   REQUEST_START,
-  RESET
+  RESET,
+  UPDATE_COMPLETE
 } from "./constants";
 
 const initialState = {
@@ -34,6 +35,12 @@ export function main(state = initialState, action) {
         ...state,
         isFetching: false,
         errors: action.errors
+      };
+
+    case UPDATE_COMPLETE:
+      return {
+        ...state,
+        data: action.payload
       };
 
     case RESET:

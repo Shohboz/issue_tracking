@@ -2,8 +2,13 @@ import {
   REQUEST_START,
   REQUEST_SUCCESS,
   REQUEST_FAIL,
-  RESET
+  RESET,
+  REQUEST_UPDATE,
+  UPDATE_COMPLETE,
+  UPDATE_OK
 } from "./constants";
+import { createNotification } from "redux/notifications/actions";
+import { SUCCESS, FAIL } from "redux/notifications/constants";
 import API from "redux/api/account";
 
 const loadStart = name => ({
@@ -40,3 +45,34 @@ export function reset(name = "") {
     name
   };
 }
+
+export function update(data) {
+  return dispatch => {
+    dispatch({ type: REQUEST_UPDATE });
+    return API.update(data)
+      .then(response =>
+        response.json().then(json => ({
+          ok: response.ok,
+          status: response.status,
+          json
+        }))
+      )
+      .then(response => {
+        if (response.ok) {
+          createNotification(dispatch, {
+            type: SUCCESS,
+            text: `Профиль успешно обновлен`
+          });
+          dispatch({ type: UPDATE_OK, payload: response.json });
+        } else {
+          createNotification(dispatch, {
+            type: FAIL,
+            text: "Обновление профиля завершилось ошибкой"
+          });
+        }
+        return dispatch({ type: UPDATE_COMPLETE, payload: response.json });
+      })
+      .catch(errors => dispatch(receiveFail(errors)));
+  };
+}
+

@@ -9,6 +9,7 @@ import RenderFieldVertical from "./RenderFieldVertical";
 import RenderSelectVertical from "./RenderSelectVertical";
 import RenderPickerVertical from "./RenderPickerVertical";
 import RenderSelectableField from "./RenderSelectableField";
+import RenderEditableField from "./RenderEditableField";
 
 export {
   RenderTextareaField,
@@ -22,5 +23,6 @@ export {
   RenderSelectVertical,
   RenderPickerVertical,
   RenderSelectableField,
+  RenderEditableField,
   RenderField as default
 };
