@@ -14,10 +14,10 @@ export default ({
   validate
 }) => (
   <div>
-    <label className="col-sm-3 control-label" style={{ textAlign: "left" }}>
+    <label className="col-sm-4 control-label" style={{ textAlign: "left" }}>
       {label}
     </label>
-    <div className="col-sm-9">
+    <div className="col-sm-8">
       <EditableString
         tagName={"p"}
         className="form-control-static"

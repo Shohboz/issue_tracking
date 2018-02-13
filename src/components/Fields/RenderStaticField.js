@@ -2,10 +2,10 @@ import React from "react";
 
 export default ({ input, label, type, value }) => (
   <div>
-    <label className="col-sm-3 control-label" style={{ textAlign: "left" }}>
+    <label className="col-sm-4 control-label" style={{ textAlign: "left" }}>
       {label}
     </label>
-    <div className="col-sm-9">
+    <div className="col-sm-8">
       <p
         {...input}
         placeholder={label}

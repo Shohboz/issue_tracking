@@ -12,9 +12,10 @@ export default class API {
 
   static create(data) {
     const url = `/api/issues`;
-    const { meeting_date, ...res } = data;
+    const { meeting_date, due_date, ...res } = data;
     const dates = filter(Boolean, {
-      meeting_date: toUnixTimestamp(meeting_date)
+      meeting_date: toUnixTimestamp(meeting_date),
+      due_date: toUnixTimestamp(due_date)
     });
     return fetch(url, {
       method: "POST",

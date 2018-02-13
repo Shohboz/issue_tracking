@@ -50,6 +50,11 @@ const App = ({
             name="meeting_date"
             label="Дата совещания"
           />
+          <RenderStaticField
+            value={toLocaleDateString(data.due_date)}
+            name="due_date"
+            label="Выполнить до"
+          />
         </Col>
         <Col xs={12} md={6} className="form-horizontal">
           <RenderStaticField

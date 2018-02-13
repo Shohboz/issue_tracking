@@ -10,11 +10,16 @@ import { required } from "redux/validation";
 
 class Form extends Component {
   state = {
-    date: null
+    date: null,
+    due_date: null
   };
 
   onChangeDate = (d, value, formattedValue) => {
     this.setState({ date: value });
+  };
+
+  onChangeDueDate = (d, value, formattedValue) => {
+    this.setState({ due_date: value });
   };
 
   render() {
@@ -47,6 +52,14 @@ class Form extends Component {
             onChange={this.onChangeDate}
             component={RenderPicker}
             validate={[required]}
+          />
+          <Field
+            name="due_date"
+            label="Выполнить до"
+            type="text"
+            date={this.state.due_date}
+            onChange={this.onChangeDueDate}
+            component={RenderPicker}
           />
           <Field
             name="status"
