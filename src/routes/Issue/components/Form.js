@@ -27,7 +27,6 @@ class Form extends Component {
       handleSubmit,
       valid,
       form,
-      optionsStatus,
       optionsUsers,
       optionsProjects,
       optionsDepartments,
@@ -60,13 +59,6 @@ class Form extends Component {
             date={this.state.due_date}
             onChange={this.onChangeDueDate}
             component={RenderPicker}
-          />
-          <Field
-            name="status"
-            label="Статус"
-            component={RenderSelect}
-            optionsToRender={optionsStatus}
-            validate={[required]}
           />
           <Field
             name="assignee_id"
