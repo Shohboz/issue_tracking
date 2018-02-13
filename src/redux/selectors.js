@@ -1,5 +1,14 @@
 import { createSelector } from "reselect";
-import { prop, compose, reduce, curry, concat, identity } from "ramda";
+import {
+  prop,
+  compose,
+  reduce,
+  curry,
+  concat,
+  identity,
+  descend,
+  sort
+} from "ramda";
 import { Maybe } from "ramda-fantasy";
 import { toRenderList, toRenderObject } from "./helpers";
 
@@ -29,8 +38,12 @@ const toRenderListObject = toRenderObject("id");
 
 const addNames = compose(addName, curry(toRenderListObject));
 
+const byDescendCreated = descend(prop("created"));
+
+const sortedIssues = compose(sort(byDescendCreated), issuesSelector);
+
 export const withNames = createSelector(
-  [usersSelector, issuesSelector],
+  [usersSelector, sortedIssues],
   (users, issues) => reduce(addNames(users), [])(issues)
 );
 
