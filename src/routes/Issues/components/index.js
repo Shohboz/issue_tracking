@@ -13,6 +13,7 @@ const TableHeader = ({ secondary }) => (
       <th>Приоритет</th>
       {!secondary && <th>Исполнитель</th>}
       {!secondary && <th>Автор</th>}
+      {!secondary && <th>Выполнить до</th>}
       <th>Дата совещания</th>
       <th>Дата создания</th>
     </tr>
@@ -28,6 +29,7 @@ const Item = ({
   assignee_id,
   reporter_id,
   status,
+  due_date,
   priority
 }) => (
   <tr
@@ -45,6 +47,7 @@ const Item = ({
     <td>{getPriority(priority)}</td>
     {!secondary && <td>{assignee_id}</td>}
     {!secondary && <td>{reporter_id}</td>}
+    {!secondary && <td>{toLocaleDateString(due_date)}</td>}
     <td>{toLocaleDateString(meeting_date)}</td>
     <td>{toLocaleDateString(created)}</td>
   </tr>

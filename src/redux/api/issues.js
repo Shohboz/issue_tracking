@@ -48,6 +48,8 @@ export default class API {
       created_start,
       created_stop,
       meeting_date_stop,
+      due_date_start,
+      due_date_stop,
       ...res
     } = data;
 
@@ -55,7 +57,9 @@ export default class API {
       meeting_date_start: toUnixTimestamp(meeting_date_start),
       created_start: toUnixTimestamp(getDate(-1, created_start)),
       meeting_date_stop: toUnixTimestamp(getDate(1, meeting_date_stop)),
-      created_stop: toUnixTimestamp(created_stop)
+      created_stop: toUnixTimestamp(created_stop),
+      due_date_start: toUnixTimestamp(due_date_start),
+      due_date_stop: toUnixTimestamp(getDate(1, due_date_stop))
     });
 
     const _ = filter(Boolean, {

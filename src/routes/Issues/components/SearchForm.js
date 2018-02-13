@@ -13,7 +13,9 @@ class Form extends Component {
     meeting_date_start: null,
     created_start: null,
     meeting_date_stop: null,
-    created_stop: null
+    created_stop: null,
+    due_date_start: null,
+    due_date_stop: null
   };
 
   onChangeMeetingDate = (d, value, formattedValue) => {
@@ -30,6 +32,14 @@ class Form extends Component {
 
   onChangeCreatedStopDate = (d, value, formattedValue) => {
     this.setState({ created_stop: value });
+  };
+
+  onChangeDueStartDate = (d, value, formattedValue) => {
+    this.setState({ due_date_start: value });
+  };
+
+  onChangeDueStopDate = (d, value, formattedValue) => {
+    this.setState({ due_date_stop: value });
   };
 
   render() {
@@ -108,6 +118,26 @@ class Form extends Component {
                     component={RenderPicker}
                   />
                 </Col>
+                <Col xs={12} md={6}>
+                  <Field
+                    name="due_date_start"
+                    label="Дата завершения с"
+                    type="text"
+                    date={this.state.due_date_start}
+                    onChange={this.onChangeDueStartDate}
+                    component={RenderPicker}
+                  />
+                </Col>
+                <Col xs={12} md={6}>
+                  <Field
+                    name="due_date_stop"
+                    label="Дата завершения до"
+                    type="text"
+                    date={this.state.due_date_stop}
+                    onChange={this.onChangeDueStopDate}
+                    component={RenderPicker}
+                  />
+                </Col>
               </div>
               <div className="row">
                 <Col xs={12} md={6}>
@@ -159,7 +189,7 @@ class Form extends Component {
           <form onSubmit={handleSubmit}>
             <Col xs={12} md={12}>
               <div className="row">
-                <Col xs={12} md={10}>
+                <Col xs={12} md={12}>
                   <Field
                     name="text"
                     label="Полнотекстовый поиск"
@@ -167,12 +197,38 @@ class Form extends Component {
                     type="text"
                   />
                 </Col>
-                <Col xs={12} md={2}>
+              </div>
+              <div className="row">
+                <Col xs={12} md={3}>
                   <Field
-                    name="status"
-                    label="Статус"
+                    name="assignee_id"
+                    label="Исполнитель"
                     component={RenderSelect}
-                    optionsToRender={optionsStatus}
+                    optionsToRender={optionsUsers}
+                  />
+                </Col>
+                <Col xs={12} md={3}>
+                  <Field
+                    name="reporter_id"
+                    label="Автор"
+                    component={RenderSelect}
+                    optionsToRender={optionsUsers}
+                  />
+                </Col>
+                <Col xs={12} md={3}>
+                  <Field
+                    name="project_id"
+                    label="Проект"
+                    component={RenderSelect}
+                    optionsToRender={optionsProjects}
+                  />
+                </Col>
+                <Col xs={12} md={3}>
+                  <Field
+                    name="department_id"
+                    label="Отдел"
+                    component={RenderSelect}
+                    optionsToRender={optionsDepartments}
                   />
                 </Col>
               </div>
@@ -221,34 +277,30 @@ class Form extends Component {
               <div className="row">
                 <Col xs={12} md={3}>
                   <Field
-                    name="assignee_id"
-                    label="Исполнитель"
-                    component={RenderSelect}
-                    optionsToRender={optionsUsers}
+                    name="due_date_start"
+                    label="Дата завершения с"
+                    type="text"
+                    date={this.state.due_date_start}
+                    onChange={this.onChangeDueStartDate}
+                    component={RenderPicker}
                   />
                 </Col>
                 <Col xs={12} md={3}>
                   <Field
-                    name="reporter_id"
-                    label="Автор"
-                    component={RenderSelect}
-                    optionsToRender={optionsUsers}
+                    name="due_date_stop"
+                    label="Дата завершения до"
+                    type="text"
+                    date={this.state.due_date_stop}
+                    onChange={this.onChangeDueStopDate}
+                    component={RenderPicker}
                   />
                 </Col>
                 <Col xs={12} md={3}>
                   <Field
-                    name="project_id"
-                    label="Проект"
+                    name="status"
+                    label="Статус"
                     component={RenderSelect}
-                    optionsToRender={optionsProjects}
-                  />
-                </Col>
-                <Col xs={12} md={3}>
-                  <Field
-                    name="department_id"
-                    label="Отдел"
-                    component={RenderSelect}
-                    optionsToRender={optionsDepartments}
+                    optionsToRender={optionsStatus}
                   />
                 </Col>
               </div>
