@@ -1,5 +1,6 @@
 import React from "react";
 import { RenderEditableField } from "components/Fields";
+// import { nonEmpty } from "redux/validation";
 
 export default ({ name, login, email, onSave }) => (
   <div className="form-horizontal">
@@ -9,12 +10,14 @@ export default ({ name, login, email, onSave }) => (
       name="login"
       label="Логин"
       onSave={onSave}
+      // validate={[nonEmpty]}
     />
     <RenderEditableField
       value={email}
       name="email"
       label="Email"
       onSave={onSave}
+      // validate={[nonEmpty]}
     />
   </div>
 );

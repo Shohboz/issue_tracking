@@ -1,5 +1,6 @@
 import React from "react";
 import { EditableString } from "components/EditableString";
+import { nonEmpty } from "redux/validation";
 
 export default ({
   input,
@@ -8,7 +9,7 @@ export default ({
   value,
   name,
   onSave: save,
-  validate,
+  // validate,
   tagName
 }) => (
   <div>
@@ -19,7 +20,7 @@ export default ({
         value={value}
         tagName={tagName || "div"}
         onSave={val => save({ [name]: val })}
-        validate={validate}
+        validate={[nonEmpty]}
       />
     </div>
   </div>

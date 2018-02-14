@@ -16,15 +16,10 @@ const { paginate } = actions;
 
 class PanelHeader extends Component {
   componentDidMount() {
-    const {
-      loadDepartments,
-      loadProjects,
-      secondary,
-      changeProject
-    } = this.props;
+    const { loadDepartments, loadProjects, changeProject } = this.props;
     loadDepartments();
     loadProjects();
-    !secondary && changeProject(null);
+    changeProject(null);
   }
 
   onSubmit = data => {
