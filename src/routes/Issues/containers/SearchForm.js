@@ -4,6 +4,7 @@ import Form from "../components/SearchForm";
 import { search } from "redux/issues/actions";
 import { actions } from "components/ComposableList";
 import { loadAll as loadProjects } from "redux/projects/actions";
+import { changeProject } from "redux/project/actions";
 import { loadAll as loadDepartments } from "redux/departments/actions";
 import {
   toRenderListUsers,
@@ -15,9 +16,15 @@ const { paginate } = actions;
 
 class PanelHeader extends Component {
   componentDidMount() {
-    const { loadDepartments, loadProjects } = this.props;
+    const {
+      loadDepartments,
+      loadProjects,
+      secondary,
+      changeProject
+    } = this.props;
     loadDepartments();
     loadProjects();
+    !secondary && changeProject(null);
   }
 
   onSubmit = data => {
@@ -53,5 +60,6 @@ export default connect(mapStateToProps, {
   search,
   loadProjects,
   loadDepartments,
-  paginate
+  paginate,
+  changeProject
 })(PanelHeader);
