@@ -78,3 +78,53 @@ legend.scheduler-border {
 .row-editable {
   background-color: #faf2cc;
 }
+
+.upload-manager {
+  text-align: left;
+  padding-left: 0;
+  padding-right: 0;
+  border: 1px solid #cccccc;
+  border-radius: 4px 4px 4px 4px;
+  margin-bottom: 25px;
+
+  footer {
+    background: #f4f4f4;
+    border-top: 1px solid #dddddd;
+    padding: 10px;
+  }
+
+  .fileinput-button {
+    position: relative;
+
+    input {
+      position: absolute;
+      transform: translate(-50px, -250px) scale(1);
+      opacity: 0;
+      width: 600px;
+      height: 260px;
+    }
+  }
+  .js-files .row {
+    padding-top: 5px;
+  }
+  .im_upload_drop_label {
+    text-align: center;
+    color: #7f92a5;
+  }
+  .im_upload_dropbox_inner {
+    background: #fff;
+    text-align: center;
+    color: #7f92a5;
+    font-size: 1.09em;
+    border: 1px dashed #a3b6c9;
+    padding: 0 5px;
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    height: 200px;
+  }
+  .dropbox-container {
+    display: table;
+    width: 100%;
+  }
+}

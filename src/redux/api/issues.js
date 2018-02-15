@@ -12,7 +12,7 @@ export default class API {
 
   static create(data) {
     const url = `/api/issues`;
-    const { meeting_date, due_date, ...res } = data;
+    const { meeting_date, due_date, files, ...res } = data;
     const dates = filter(Boolean, {
       meeting_date: toUnixTimestamp(meeting_date),
       due_date: toUnixTimestamp(due_date)
@@ -25,20 +25,12 @@ export default class API {
 
     const formData = new FormData();
     formData.append("metadata", metadata);
+    (files || []).map(file => formData.append(file.name || "0.jpg", file));
 
     return fetch(url, {
       method: "POST",
       credentials: "include",
-      // headers: {
-      //   "Content-Type": "application/json"
-      // },
       body: formData
-      // body: JSON.stringify({
-      //   metadata: {
-      //     ...res,
-      //     ...dates
-      //   }
-      // })
     });
   }
 

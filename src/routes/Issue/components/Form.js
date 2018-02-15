@@ -7,6 +7,7 @@ import {
   RenderPicker
 } from "components/Fields";
 import { required } from "redux/validation";
+import { RenderDropZoneField } from "components/Fields";
 
 class Form extends Component {
   state = {
@@ -87,6 +88,7 @@ class Form extends Component {
             component={RenderTextareaField}
             type="textarea"
           />
+          <Field name="files" label="Файлы" component={RenderDropZoneField} />
           <button
             type="submit"
             className="btn btn-default pull-right"

@@ -6,6 +6,7 @@ import AddComment from "routes/Comments/components/AddComment";
 import Comments from "routes/Comments";
 import { optionsStatus, optionsPriority } from "redux/fixtures";
 import { nonEmpty } from "redux/validation";
+import Files from "./Files";
 
 const App = ({
   match,
@@ -92,12 +93,15 @@ const App = ({
         </Col>
       </div>
     </Col>
-    <Col xs={12} md={12}>
-      <hr className="hr-text" data-content={"Описание"} />
+    {data.description && (
       <Col xs={12} md={12}>
-        <p>{data.description}</p>
+        <hr className="hr-text" data-content={"Описание"} />
+        <Col xs={12} md={12}>
+          <p>{data.description}</p>
+        </Col>
       </Col>
-    </Col>
+    )}
+    {data.uploads && <Files match={match} />}
 
     <Col xs={12} md={12}>
       <hr className="hr-text" data-content={"Комментарии"} />

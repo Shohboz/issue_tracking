@@ -1,20 +1,12 @@
-import { combineReducers } from "redux";
-import {
-  REQUEST_FAIL,
-  REQUEST_SUCCESS,
-  REQUEST_START,
-  RESET
-} from "./constants";
-import comments from "redux/comments/reducers";
-import files from "redux/files/reducers";
+import { REQUEST_FAIL, REQUEST_SUCCESS, REQUEST_START } from "./constants";
 
 const initialState = {
   isFetching: false,
-  data: null,
+  list: [],
   errors: ""
 };
 
-export function main(state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case REQUEST_START:
       return {
@@ -26,7 +18,7 @@ export function main(state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        data: action.payload,
+        list: action.payload,
         lastUpdated: action.receivedAt,
         errors: ""
       };
@@ -38,16 +30,7 @@ export function main(state = initialState, action) {
         errors: action.errors
       };
 
-    case RESET:
-      return initialState;
-
     default:
       return state;
   }
-}
-
-export default combineReducers({
-  main,
-  comments,
-  files
-});
+};
