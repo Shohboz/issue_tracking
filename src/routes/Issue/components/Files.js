@@ -13,7 +13,7 @@ const File = ({ filename, path }) => (
 class Files extends Component {
   componentDidMount() {
     const { match: { params: { issueID } }, load } = this.props;
-    load(issueID);
+    load(issueID, "issues");
   }
 
   render() {

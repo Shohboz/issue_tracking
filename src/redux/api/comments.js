@@ -9,15 +9,21 @@ export default class API {
   }
 
   static create(data) {
-    const { issueID, ...res } = data;
+    const { issueID, files, ...res } = data;
     const url = `/api/issues/${issueID}/comments`;
+
+    const metadata = JSON.stringify({
+      ...res
+    });
+
+    const formData = new FormData();
+    formData.append("metadata", metadata);
+    (files || []).map(file => formData.append(file.name || "0.jpg", file));
+
     return fetch(url, {
       method: "POST",
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(res)
+      body: formData
     });
   }
 }

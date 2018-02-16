@@ -1,7 +1,7 @@
 import React from "react";
 import { reduxForm } from "redux-form";
 import { Field } from "redux-form";
-import { RenderTextField } from "components/Fields";
+import { RenderTextField, RenderDropZone } from "components/Fields";
 import { required } from "redux/validation";
 
 const Form = ({ handleSubmit, valid, onClose, isFetching }) => (
@@ -14,6 +14,7 @@ const Form = ({ handleSubmit, valid, onClose, isFetching }) => (
         type="text"
         validate={[required]}
       />
+      <Field name="files" label="Файлы" component={RenderDropZone} />
       <div className="btn-group">
         <button
           className="btn btn-default"

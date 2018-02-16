@@ -16,10 +16,10 @@ const receiveFail = errors => ({
   errors
 });
 
-export function loadAll(id) {
+export function loadAll(id, name) {
   return dispatch => {
     dispatch(loadStart());
-    return API.get(id)
+    return API.get(id, name)
       .then(response => response.json())
       .then(json => dispatch(receiveList(json)))
       .catch(errors => dispatch(receiveFail(errors)));
