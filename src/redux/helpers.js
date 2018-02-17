@@ -19,7 +19,14 @@ export const jsonToQueryString = json =>
     .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(json[key]))
     .join("&");
 
-export const toUnixTimestamp = x => x && (+new Date(x) / 1000) | 0;
+const timestamp = x => (+new Date(x) / 1000) | 0;
+
+export const toUnixTimestamp = x => x && timestamp(x);
+
+export const todayTimestamp = timestamp(new Date());
+
+export const isOutdated = x =>
+  x > todayTimestamp && x - todayTimestamp <= 172800;
 
 export const getDate = curry((d, x) => {
   const _ = new Date(x);

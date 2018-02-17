@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Panel } from "react-bootstrap";
-import { toLocaleDateString, getStatus, getPriority } from "redux/helpers";
+import {
+  toLocaleDateString,
+  getStatus,
+  getPriority,
+  isOutdated
+} from "redux/helpers";
 import NoItems from "components/EmptyList";
 
 const TableHeader = ({ secondary }) => (
@@ -53,7 +58,11 @@ const Item = ({
     <td>{getPriority(priority)}</td>
     {!secondary && <td>{assignee_id}</td>}
     {!secondary && <td>{reporter_id}</td>}
-    {!secondary && <td>{toLocaleDateString(due_date)}</td>}
+    {!secondary && (
+      <td className={isOutdated(due_date) ? "td-alert" : ""}>
+        {toLocaleDateString(due_date)}
+      </td>
+    )}
     <td>{toLocaleDateString(meeting_date)}</td>
     <td>{toLocaleDateString(created)}</td>
   </tr>
