@@ -41,9 +41,13 @@ const Item = ({
     <td>
       <Link to={`/issues/${id}`}>{title}</Link>
     </td>
-    <td className={status === "closed" ? "text-success" : ""}>
-      {getStatus(status)}
-    </td>
+    {status === "closed" ? (
+      <td className="text-success">
+        <strong>{getStatus(status)}</strong>
+      </td>
+    ) : (
+      <td>{getStatus(status)}</td>
+    )}
     <td>{getPriority(priority)}</td>
     {!secondary && <td>{assignee_id}</td>}
     {!secondary && <td>{reporter_id}</td>}
