@@ -1,13 +1,6 @@
 import React, { Fragment } from "react";
 import { toLocaleDateString } from "redux/helpers";
-
-const File = ({ filename, path }) => (
-  <li>
-    <small>
-      <span alt={path}>{filename}</span>
-    </small>
-  </li>
-);
+import File from "components/File";
 
 const Comment = ({ comment, user, created, uploads, files }) => (
   <Fragment>

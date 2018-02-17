@@ -1,13 +1,8 @@
 import React, { Component } from "react";
 import { Col } from "react-bootstrap";
+import File from "components/File";
 import { connect } from "react-redux";
 import { loadAll as load } from "redux/files/actions";
-
-const File = ({ filename, path }) => (
-  <li>
-    <span alt={path}>{filename}</span>
-  </li>
-);
 
 class Files extends Component {
   componentDidMount() {
