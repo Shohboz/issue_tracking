@@ -27,11 +27,10 @@ const Comment = ({ comment, user, created, uploads, files }) => (
   </Fragment>
 );
 
-export default ({ items, optionsUsers, load }) => (
+export default ({ items, optionsUsers }) => (
   <Fragment>
     {items.map(x => (
       <Comment
-        action={load}
         key={x.id}
         user={
           (optionsUsers[x.user_id] && optionsUsers[x.user_id].name) ||
@@ -43,5 +42,3 @@ export default ({ items, optionsUsers, load }) => (
     ))}
   </Fragment>
 );
-
-// export default connect(null, { load })(Comments);
