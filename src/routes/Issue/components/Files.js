@@ -1,13 +1,12 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
 import { Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { loadAll as load } from "redux/files/actions";
 
 const File = ({ filename, path }) => (
-  <Fragment>
+  <li>
     <span alt={path}>{filename}</span>
-    <br />
-  </Fragment>
+  </li>
 );
 
 class Files extends Component {
@@ -22,7 +21,9 @@ class Files extends Component {
       <Col xs={12} md={12}>
         <hr className="hr-text" data-content={"Файлы"} />
         <Col xs={12} md={12}>
-          <p>{list.map((file, idx) => <File key={idx} {...file} />)}</p>
+          <ul className="list-unstyled">
+            {list.map((file, idx) => <File key={idx} {...file} />)}
+          </ul>
         </Col>
       </Col>
     );

@@ -1,20 +1,37 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { toLocaleDateString } from "redux/helpers";
 
-const Comment = ({ comment, user, created }) => (
-  <div>
+const File = ({ filename, path }) => (
+  <li>
+    <small>
+      <span alt={path}>{filename}</span>
+    </small>
+  </li>
+);
+
+const Comment = ({ comment, user, created, uploads, files }) => (
+  <Fragment>
     <p>
       <strong>{user}</strong> - {toLocaleDateString(created) || "не указано"}
     </p>
     <text>{comment}</text>
+    {uploads && (
+      <blockquote style={{ marginTop: 10, marginBottom: 5 }}>
+        <ul className="list-unstyled">
+          {files.map((file, idx) => <File key={idx} {...file} />)}
+        </ul>
+      </blockquote>
+    )}
+
     <hr className="hr-text" style={{ marginTop: 0, marginBottom: 10 }} />
-  </div>
+  </Fragment>
 );
 
-export default ({ items, optionsUsers }) => (
-  <div>
+export default ({ items, optionsUsers, load }) => (
+  <Fragment>
     {items.map(x => (
       <Comment
+        action={load}
         key={x.id}
         user={
           (optionsUsers[x.user_id] && optionsUsers[x.user_id].name) ||
@@ -24,5 +41,7 @@ export default ({ items, optionsUsers }) => (
         {...x}
       />
     ))}
-  </div>
+  </Fragment>
 );
+
+// export default connect(null, { load })(Comments);

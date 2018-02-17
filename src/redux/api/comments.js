@@ -2,7 +2,7 @@ import fetch from "isomorphic-fetch";
 
 export default class API {
   static get(issueID = "") {
-    const url = `/api/issues/${issueID}/comments`;
+    const url = `/api/issues/${issueID}/comments?with=files`;
     return fetch(url, {
       credentials: "include"
     });
