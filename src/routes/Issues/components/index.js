@@ -43,7 +43,9 @@ const Item = ({
     </td>
     {status === "closed" ? (
       <td className="text-success">
-        <strong>{getStatus(status)}</strong>
+        <strong>
+          <em>{getStatus(status)}</em>
+        </strong>
       </td>
     ) : (
       <td>{getStatus(status)}</td>
