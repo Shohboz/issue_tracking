@@ -33,15 +33,15 @@ const Header = ({ account, items: { projects, departments } }) => (
     </Navbar.Header>
     <Nav>
       {projects && (
-        <NavItemDropDown title="проекты" name="projects" {...projects} />
+        <NavItemDropDown title="Проекты" name="projects" {...projects} />
       )}
-      {!projects && <NavItem href={"/projects"}>проекты</NavItem>}
+      {!projects && <NavItem href={"/projects"}>Проекты</NavItem>}
       {departments && (
-        <NavItemDropDown title="отделы" name="departments" {...departments} />
+        <NavItemDropDown title="Отделы" name="departments" {...departments} />
       )}
-      {!departments && <NavItem href={"/departments"}>отделы</NavItem>}
-      <NavItem href={"/users"}>пользователи</NavItem>
-      <NavItem href={"/issues"}>вопросы</NavItem>
+      {!departments && <NavItem href={"/departments"}>Отделы</NavItem>}
+      <NavItem href={"/users"}>Пользователи</NavItem>
+      <NavItem href={"/issues"}>Вопросы</NavItem>
     </Nav>
     <Nav pullRight>{account && <Account {...account} />}</Nav>
   </Navbar>
