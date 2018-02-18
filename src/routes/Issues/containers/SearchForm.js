@@ -4,8 +4,6 @@ import Form from "../components/SearchForm";
 import { search } from "redux/issues/actions";
 import { actions } from "components/ComposableList";
 import { loadAll as loadProjects } from "redux/projects/actions";
-import { changeProject } from "redux/project/actions";
-import { changeDepartment } from "redux/department/actions";
 import { loadAll as loadDepartments } from "redux/departments/actions";
 import {
   toRenderListUsers,
@@ -19,14 +17,10 @@ class PanelHeader extends Component {
   componentDidMount() {
     const {
       loadDepartments,
-      loadProjects,
-      changeProject,
-      changeDepartment
+      loadProjects
     } = this.props;
     loadDepartments();
     loadProjects();
-    changeProject(null);
-    changeDepartment(null);
   }
 
   onSubmit = data => {
@@ -42,17 +36,11 @@ class PanelHeader extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { issues: { main: { isFetching } } } = state;
-  const {
-    projects: { current: { main: { departmentId } } },
-    departments: { current: { main: { projectId } } }
-  } = state;
   const { match } = ownProps;
   return {
     initialValues: {
-      project_id:
-        projectId || (match && match.params && match.params.projectID),
-      department_id:
-        departmentId || (match && match.params && match.params.departmentID)
+      project_id: match && match.params && match.params.projectID,
+      department_id: match && match.params && match.params.departmentID
     },
     optionsUsers: toRenderListUsers(state),
     optionsProjects: toRenderListProjects(state),
@@ -65,7 +53,5 @@ export default connect(mapStateToProps, {
   search,
   loadProjects,
   loadDepartments,
-  paginate,
-  changeProject,
-  changeDepartment
+  paginate
 })(PanelHeader);

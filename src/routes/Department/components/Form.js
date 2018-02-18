@@ -24,6 +24,6 @@ const Form = ({ handleSubmit, valid, form }) => (
   </form>
 );
 
-export default reduxForm({ form: "projectForm", enableReinitialize: true })(
+export default reduxForm({ form: "departmentForm", enableReinitialize: true })(
   Form
 );

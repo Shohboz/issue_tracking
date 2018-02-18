@@ -18,7 +18,7 @@ const TableHeader = ({ secondary }) => (
       <th>Приоритет</th>
       {!secondary && <th>Исполнитель</th>}
       {!secondary && <th>Автор</th>}
-      {!secondary && <th>Выполнить до</th>}
+      <th>Выполнить до</th>
       <th>Дата совещания</th>
       <th>Дата создания</th>
     </tr>
@@ -58,11 +58,9 @@ const Item = ({
     <td>{getPriority(priority)}</td>
     {!secondary && <td>{assignee_id}</td>}
     {!secondary && <td>{reporter_id}</td>}
-    {!secondary && (
-      <td className={isOutdated(due_date) ? "td-alert" : ""}>
-        {toLocaleDateString(due_date)}
-      </td>
-    )}
+    <td className={isOutdated(due_date) ? "td-alert" : ""}>
+      {toLocaleDateString(due_date)}
+    </td>
     <td>{toLocaleDateString(meeting_date)}</td>
     <td>{toLocaleDateString(created)}</td>
   </tr>

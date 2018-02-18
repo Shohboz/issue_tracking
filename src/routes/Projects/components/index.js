@@ -4,7 +4,7 @@ import { Panel } from "react-bootstrap";
 import { toLocaleDateString } from "redux/helpers";
 import NoItems from "components/EmptyList";
 import { connect } from "react-redux";
-import { changeDepartment } from "redux/department/actions";
+import { change, submit } from "redux-form";
 
 const TableHeader = () => (
   <thead>
@@ -16,12 +16,18 @@ const TableHeader = () => (
   </thead>
 );
 
-const Item = ({ id, name, created, secondary, action }) => (
+const Item = ({ id, name, created, secondary, action, submit }) => (
   <tr>
     <td>{id}</td>
     <td>
       {secondary && (
-        <a className="vlink" onClick={() => action(id)}>
+        <a
+          className="vlink"
+          onClick={() => {
+            action("searchIssueForm", "project_id", id);
+            setTimeout(() => submit("searchIssueForm"));
+          }}
+        >
           {name}
         </a>
       )}
@@ -31,15 +37,21 @@ const Item = ({ id, name, created, secondary, action }) => (
   </tr>
 );
 
-const TableBody = ({ items, secondary, action }) => (
+const TableBody = ({ items, secondary, action, submit }) => (
   <tbody>
     {items.map(item => (
-      <Item secondary={secondary} key={item.id} {...item} action={action} />
+      <Item
+        secondary={secondary}
+        key={item.id}
+        {...item}
+        submit={submit}
+        action={action}
+      />
     ))}
   </tbody>
 );
 
-const Projects = ({ items, secondary, changeDepartment: action }) => (
+const Projects = ({ items, secondary, change: action, submit }) => (
   <Panel.Body>
     <div className="table-responsive">
       <table className="table table-striped">
@@ -51,6 +63,7 @@ const Projects = ({ items, secondary, changeDepartment: action }) => (
               key="projects-list"
               secondary={secondary}
               action={action}
+              submit={submit}
             />
           ]
         ) : (
@@ -61,4 +74,4 @@ const Projects = ({ items, secondary, changeDepartment: action }) => (
   </Panel.Body>
 );
 
-export default connect(null, { changeDepartment })(Projects);
+export default connect(null, { change, submit })(Projects);

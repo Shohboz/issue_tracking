@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { toLocaleDateString } from "redux/helpers";
 import NoItems from "components/EmptyList";
 import { connect } from "react-redux";
-import { changeProject } from "redux/project/actions";
+import { change, submit } from "redux-form";
 
 const TableHeader = () => (
   <thead>
@@ -16,12 +16,18 @@ const TableHeader = () => (
   </thead>
 );
 
-const Item = ({ id, name, created, secondary, action }) => (
+const Item = ({ id, name, created, secondary, action, submit }) => (
   <tr>
     <td>{id}</td>
     <td>
       {secondary && (
-        <a className="vlink" onClick={() => action(id)}>
+        <a
+          className="vlink"
+          onClick={() => {
+            action("searchIssueForm", "department_id", id);
+            setTimeout(() => submit("searchIssueForm"));
+          }}
+        >
           {name}
         </a>
       )}
@@ -30,15 +36,21 @@ const Item = ({ id, name, created, secondary, action }) => (
     <td>{toLocaleDateString(created)}</td>
   </tr>
 );
-const TableBody = ({ items, secondary, action }) => (
+const TableBody = ({ items, secondary, action, submit }) => (
   <tbody>
     {items.map((item, idx) => (
-      <Item secondary={secondary} key={idx} {...item} action={action} />
+      <Item
+        secondary={secondary}
+        key={idx}
+        {...item}
+        submit={submit}
+        action={action}
+      />
     ))}
   </tbody>
 );
 
-const Departments = ({ items, secondary, changeProject: action }) => (
+const Departments = ({ items, secondary, change: action, submit }) => (
   <Panel.Body>
     <div className="table-responsive">
       <table className="table table-striped">
@@ -49,6 +61,7 @@ const Departments = ({ items, secondary, changeProject: action }) => (
               items={items}
               secondary={secondary}
               action={action}
+              submit={submit}
               key="projects-list"
             />
           ]
@@ -60,4 +73,4 @@ const Departments = ({ items, secondary, changeProject: action }) => (
   </Panel.Body>
 );
 
-export default connect(null, { changeProject })(Departments);
+export default connect(null, { change, submit })(Departments);

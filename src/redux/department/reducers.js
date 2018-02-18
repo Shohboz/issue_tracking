@@ -2,8 +2,7 @@ import { combineReducers } from "redux";
 import {
   REQUEST_FAIL,
   REQUEST_SUCCESS,
-  REQUEST_START,
-  CHANGE_CURRENT_DEPARTMENT
+  REQUEST_START
 } from "./constants";
 import wrapperReducer from "redux/containers/wrapperReducer";
 
@@ -36,12 +35,6 @@ export function main(state = initialState, action) {
         ...state,
         isFetching: false,
         errors: action.errors
-      };
-
-    case CHANGE_CURRENT_DEPARTMENT:
-      return {
-        ...state,
-        projectId: action.payload
       };
 
     default:
