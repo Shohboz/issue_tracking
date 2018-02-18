@@ -42,15 +42,13 @@ const Form = ({
           validate={[required]}
         />
       )}
-      {!id && (
-        <Field
-          name="role"
-          label="Роль"
-          component={RenderSelect}
-          optionsToRender={optionsRole}
-          validate={[required]}
-        />
-      )}
+      <Field
+        name="role"
+        label="Роль"
+        component={RenderSelect}
+        optionsToRender={optionsRole}
+        validate={[required]}
+      />
       <Field
         name="enable"
         component={RenderEnable}
