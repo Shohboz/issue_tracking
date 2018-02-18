@@ -30,6 +30,7 @@ export default WrappedComponent => (Wrapper = "div") => ({
 
     render() {
       const { list } = this.props;
+
       return (
         <Wrapper>
           <WrappedComponent {...this.props} items={list} />

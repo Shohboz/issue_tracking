@@ -1,4 +1,9 @@
-import { REQUEST_START, REQUEST_SUCCESS, REQUEST_FAIL } from "./constants";
+import {
+  REQUEST_START,
+  REQUEST_SUCCESS,
+  REQUEST_FAIL,
+  CHANGE_CURRENT_DEPARTMENT
+} from "./constants";
 import API from "redux/api/department";
 
 const loadStart = name => ({
@@ -28,3 +33,9 @@ export function load(id, name) {
       .catch(errors => dispatch(receiveFail(errors, name)));
   };
 }
+
+export const changeDepartment = (id, name) => ({
+  type: CHANGE_CURRENT_DEPARTMENT,
+  payload: id,
+  name
+});
