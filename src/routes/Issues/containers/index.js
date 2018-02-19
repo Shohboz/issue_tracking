@@ -11,9 +11,13 @@ import Items from "../components";
 import { withNames } from "redux/selectors";
 import { Link } from "react-router-dom";
 
-const { withPaginate, withFilter } = enhancements;
+const { withPaginate, withFilter, withSort } = enhancements;
 
-const List = compose(withFilter(), withPaginate({ size: 15 })(Footer))(Items);
+const List = compose(
+  withSort(),
+  withFilter(),
+  withPaginate({ size: 15 })(Footer)
+)(Items);
 
 const AdvancedSearch = () => (
   <div className="col-sm-5">

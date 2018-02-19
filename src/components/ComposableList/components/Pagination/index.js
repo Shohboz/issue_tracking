@@ -1,3 +1,1 @@
-import Pagination from "./containers";
-
-export default Pagination;
+export { default } from "./containers";

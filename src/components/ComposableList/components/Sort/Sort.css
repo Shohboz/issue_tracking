@@ -1,0 +1,10 @@
+.composable-list-sort {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+.composable-list-sort:hover {
+  color: black;
+  text-decoration: none;
+}

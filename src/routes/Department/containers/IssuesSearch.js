@@ -11,9 +11,9 @@ import Preloader from "components/Preloader";
 import ErrorPage from "components/ErrorPage";
 import { search } from "redux/issues/actions";
 
-const { withPaginate } = enhancements;
+const { withPaginate, withSort } = enhancements;
 
-const List = compose(withPaginate({ size: 15 })(Footer))(Items);
+const List = compose(withSort(), withPaginate({ size: 15 })(Footer))(Items);
 
 const PaginatedList = ({ items, isFetching, errors, match }) => [
   <PanelHeader
@@ -25,7 +25,8 @@ const PaginatedList = ({ items, isFetching, errors, match }) => [
   <div key="issues">
     {isFetching && <Preloader minHeight="200px" />}
     {!isFetching &&
-      !errors && <List items={items} uniqueKey={"issues"} secondary={true} />}
+      !errors &&
+      <List items={items} uniqueKey={"issues"} secondary={true} />}
     {errors && <ErrorPage errors={errors} />}
   </div>
 ];

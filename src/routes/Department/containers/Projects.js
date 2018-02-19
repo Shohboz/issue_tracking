@@ -8,9 +8,13 @@ import { Footer } from "components/Panel";
 import withPanel from "components/List";
 import { Search as PanelHeader } from "components/Panel";
 
-const { withPaginate, withFilter } = enhancements;
+const { withPaginate, withFilter, withSort } = enhancements;
 
-const List = compose(withFilter(), withPaginate({ size: 10 })(Footer))(Items);
+const List = compose(
+  withSort(),
+  withFilter(),
+  withPaginate({ size: 10 })(Footer)
+)(Items);
 
 const PaginatedList = ({ items }) => [
   <PanelHeader

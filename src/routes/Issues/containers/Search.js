@@ -12,9 +12,10 @@ import PanelHeader from "./SearchForm";
 import Preloader from "components/Preloader";
 import ErrorPage from "components/ErrorPage";
 
-const { withPaginate } = enhancements;
+// const { withPaginate } = enhancements;
+const { withPaginate, withSort } = enhancements;
 
-const List = compose(withPaginate({ size: 15 })(Footer))(Items);
+const List = compose(withSort(), withPaginate({ size: 15 })(Footer))(Items);
 
 const PaginatedList = ({ items, isFetching, errors }) => [
   <PanelHeader uniqueKey={"issues"} key="header" />,

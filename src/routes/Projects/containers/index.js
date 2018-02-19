@@ -9,9 +9,13 @@ import withPanel from "components/List";
 import { withLoader } from "components/HOC";
 import Items from "../components";
 
-const { withPaginate, withFilter } = enhancements;
+const { withPaginate, withFilter, withSort } = enhancements;
 
-const List = compose(withFilter(), withPaginate({ size: 15 })(Footer))(Items);
+const List = compose(
+  withSort(),
+  withFilter(),
+  withPaginate({ size: 15 })(Footer)
+)(Items);
 
 const PaginatedList = ({ items }) => [
   <PanelHeader

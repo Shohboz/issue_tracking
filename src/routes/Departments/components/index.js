@@ -5,13 +5,32 @@ import { toLocaleDateString } from "redux/helpers";
 import NoItems from "components/EmptyList";
 import { connect } from "react-redux";
 import { change, submit } from "redux-form";
+import { components } from "components/ComposableList";
+const { Enhanced, Sort } = components;
+
+const SORTS_ASC_DESC = {
+  ASC: <small><span className="glyphicon glyphicon-triangle-bottom" /></small>,
+  DESC: <small><span className="glyphicon glyphicon-triangle-top" /></small>
+};
 
 const TableHeader = () => (
   <thead>
     <tr>
       <th>ID</th>
-      <th>Название</th>
-      <th>Дата создания</th>
+      <th>
+        <Sort sortKey={"name"} sortFn={x => x.name} suffix={SORTS_ASC_DESC}>
+          Название
+        </Sort>
+      </th>
+      <th>
+        <Sort
+          sortKey={"created"}
+          sortFn={x => x.created}
+          suffix={SORTS_ASC_DESC}
+        >
+          Дата создания
+        </Sort>
+      </th>
     </tr>
   </thead>
 );
@@ -20,7 +39,7 @@ const Item = ({ id, name, created, secondary, action, submit }) => (
   <tr>
     <td>{id}</td>
     <td>
-      {secondary && (
+      {secondary &&
         <a
           className="vlink"
           onClick={() => {
@@ -29,8 +48,7 @@ const Item = ({ id, name, created, secondary, action, submit }) => (
           }}
         >
           {name}
-        </a>
-      )}
+        </a>}
       {!secondary && <Link to={`/departments/${id}`}>{name}</Link>}
     </td>
     <td>{toLocaleDateString(created)}</td>
@@ -50,26 +68,32 @@ const TableBody = ({ items, secondary, action, submit }) => (
   </tbody>
 );
 
-const Departments = ({ items, secondary, change: action, submit }) => (
+const Departments = ({
+  items,
+  secondary,
+  change: action,
+  submit,
+  uniqueKey
+}) => (
   <Panel.Body>
-    <div className="table-responsive">
-      <table className="table table-striped">
-        {items.length ? (
-          [
-            <TableHeader key="projects-header" />,
-            <TableBody
-              items={items}
-              secondary={secondary}
-              action={action}
-              submit={submit}
-              key="projects-list"
-            />
-          ]
-        ) : (
-          <NoItems />
-        )}
-      </table>
-    </div>
+    <Enhanced uniqueKey={uniqueKey}>
+      <div className="table-responsive">
+        <table className="table table-striped">
+          {items.length
+            ? [
+                <TableHeader key="projects-header" />,
+                <TableBody
+                  items={items}
+                  secondary={secondary}
+                  action={action}
+                  submit={submit}
+                  key="projects-list"
+                />
+              ]
+            : <NoItems />}
+        </table>
+      </div>
+    </Enhanced>
   </Panel.Body>
 );
 
