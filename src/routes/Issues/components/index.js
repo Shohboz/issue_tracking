@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Panel } from "react-bootstrap";
 import {
   toLocaleDateString,
@@ -109,7 +108,7 @@ const Item = ({
   >
     <td>{id}</td>
     <td>
-      <Link to={`/issues/${id}`}>{title}</Link>
+      <a href={`/issues/${id}`} target="_blank">{title}</a>
     </td>
     {status === "closed"
       ? <td className="text-success">
