@@ -1,9 +1,15 @@
 import React from "react";
 import { reduxForm, Field } from "redux-form";
-import { RenderField } from "components/Fields";
+import { RenderField, RenderEnable } from "components/Fields";
 import { required } from "redux/validation";
 
-const Form = ({ handleSubmit, valid, form }) => (
+const Form = ({
+  handleSubmit,
+  valid,
+  form,
+  match: { params: { projectID: id } },
+  isFetching
+}) => (
   <form onSubmit={handleSubmit}>
     <div className="form-horizontal">
       <Field
@@ -13,12 +19,19 @@ const Form = ({ handleSubmit, valid, form }) => (
         type="text"
         validate={[required]}
       />
+      {id &&
+        <Field
+          name="archived"
+          component={RenderEnable}
+          label="Архивный"
+          validate={[required]}
+        />}
       <button
         type="submit"
         className="btn btn-default pull-right"
-        disabled={!valid}
+        disabled={!valid || isFetching}
       >
-        Создать
+        {id ? "Обновить" : "Создать"}
       </button>
     </div>
   </form>

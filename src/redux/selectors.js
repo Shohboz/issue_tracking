@@ -8,6 +8,7 @@ import {
   identity,
   descend,
   sort
+  // filter
 } from "ramda";
 import { Maybe } from "ramda-fantasy";
 import { toRenderList, toRenderObject } from "./helpers";
@@ -66,3 +67,8 @@ export const toObjectDepartments = createSelector(
   departmentsSelector,
   toRenderListObject
 );
+
+// export const archivedProjects = createSelector(
+//   projectsSelector,
+//   filter(prop("archived"))
+// );

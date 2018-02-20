@@ -32,16 +32,15 @@ const Header = ({ account, items: { projects, departments } }) => (
       </Navbar.Brand>
     </Navbar.Header>
     <Nav>
-      {projects && (
-        <NavItemDropDown title="Проекты" name="projects" {...projects} />
-      )}
+      {projects &&
+        <NavItemDropDown title="Проекты" name="projects" {...projects} />}
       {!projects && <NavItem href={"/projects"}>Проекты</NavItem>}
-      {departments && (
-        <NavItemDropDown title="Отделы" name="departments" {...departments} />
-      )}
+      {departments &&
+        <NavItemDropDown title="Отделы" name="departments" {...departments} />}
       {!departments && <NavItem href={"/departments"}>Отделы</NavItem>}
       <NavItem href={"/users"}>Пользователи</NavItem>
       <NavItem href={"/issues"}>Вопросы</NavItem>
+      <NavItem href={"/archived_projects"}>Архивные проекты</NavItem>
     </Nav>
     <Nav pullRight>{account && <Account {...account} />}</Nav>
   </Navbar>

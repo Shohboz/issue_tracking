@@ -4,10 +4,11 @@ import { withRouter } from "react-router";
 import Layout from "components/Layout";
 import Project from "routes/Project";
 import Projects from "routes/Projects";
+import Archived from "routes/Projects/containers/archived";
 import Users from "routes/Users";
 import Departments from "routes/Departments";
 import Department from "routes/Department";
-import ProjectForm from "routes/Project/components/Panel";
+import ProjectForm from "routes/Project/components/WithGrid";
 import UserForm from "routes/User/components/Panel";
 import DepartmentForm from "routes/Department/components/Panel";
 import Issues from "routes/Issues/routes";
@@ -23,6 +24,7 @@ export default (
         component={withRouter(Project)}
       />
       <Route exact path={`/issues/:issueID?`} component={withRouter(Issues)} />
+      <Route exact path={"/archived_projects"} component={Archived} />
       <Route exact path={"/projects"} component={Projects} />
       <Route exact path={"/users/new"} component={withRouter(UserForm)} />
       <Route exact path={"/users/:userID"} component={withRouter(UserForm)} />

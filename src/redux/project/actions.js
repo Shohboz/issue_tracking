@@ -1,8 +1,4 @@
-import {
-  REQUEST_START,
-  REQUEST_SUCCESS,
-  REQUEST_FAIL
-} from "./constants";
+import { REQUEST_START, REQUEST_SUCCESS, REQUEST_FAIL } from "./constants";
 import API from "redux/api/project";
 
 const loadStart = name => ({
@@ -17,11 +13,28 @@ const receiveList = (json, name) => ({
   name
 });
 
+const receiveData = (json, name) => ({
+  type: REQUEST_SUCCESS,
+  payload: json,
+  receivedAt: Date.now(),
+  name
+});
+
 const receiveFail = (errors, name) => ({
   type: REQUEST_FAIL,
   errors,
   name
 });
+
+export function loadEntity(id, name) {
+  return dispatch => {
+    dispatch(loadStart(name));
+    return API.get(id, name)
+      .then(response => response.json())
+      .then(json => dispatch(receiveData(json, name)))
+      .catch(errors => dispatch(receiveFail(errors, name)));
+  };
+}
 
 export function load(id, name) {
   return dispatch => {

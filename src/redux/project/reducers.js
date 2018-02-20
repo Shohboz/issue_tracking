@@ -1,16 +1,12 @@
 import { combineReducers } from "redux";
-import {
-  REQUEST_FAIL,
-  REQUEST_SUCCESS,
-  REQUEST_START
-} from "./constants";
+import { REQUEST_FAIL, REQUEST_SUCCESS, REQUEST_START } from "./constants";
 import wrapperReducer from "redux/containers/wrapperReducer";
 
 const initialState = {
   isFetching: false,
   list: [],
-  errors: "",
-  departmentId: null
+  data: null,
+  errors: ""
 };
 
 export function main(state = initialState, action) {
@@ -22,10 +18,11 @@ export function main(state = initialState, action) {
       };
 
     case REQUEST_SUCCESS:
+      const prop = action.name === "project" ? "data" : "list";
       return {
         ...state,
         isFetching: false,
-        list: action.payload,
+        [prop]: action.payload,
         lastUpdated: action.receivedAt,
         errors: ""
       };
@@ -43,7 +40,7 @@ export function main(state = initialState, action) {
 }
 
 export default combineReducers({
-  main,
+  main: wrapperReducer(main, "project"),
   issues: wrapperReducer(main, "issues"),
   departments: wrapperReducer(main, "departments")
 });

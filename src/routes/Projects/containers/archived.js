@@ -1,5 +1,5 @@
 import React from "react";
-import { loadAll as load } from "redux/projects/actions";
+import { loadAll as load } from "redux/archived/actions";
 import { Grid } from "react-bootstrap";
 import { compose } from "recompose";
 import { enhancements } from "components/ComposableList";
@@ -8,6 +8,7 @@ import { Search as PanelHeader } from "components/Panel";
 import withPanel from "components/List";
 import { withLoader } from "components/HOC";
 import Items from "../components";
+// import { archivedProjects } from "redux/selectors";
 
 const { withPaginate, withFilter, withSort } = enhancements;
 
@@ -21,22 +22,19 @@ const PaginatedList = ({ items }) => [
   <PanelHeader
     key="header"
     searchBy={["name"]}
-    uniqueKey="projects"
+    uniqueKey="archived_projects"
     placeholder={"Поиск по названию проекта"}
     title={"Добавить проект"}
     link={"/projects/new"}
   />,
-  <List items={items} uniqueKey={"projects"} key="list" />
+  <List items={items} uniqueKey={"archived_projects"} key="list" />
 ];
 
 const mapStateToProps = state => {
-  const { projects: { main: { isFetching, errors, list } } } = state;
+  const { archived: { main: { isFetching, errors, list } } } = state;
   return {
     errors,
     list,
-    // list: ownProps.location && ownProps.location.search
-    //   ? archivedProjects(state)
-    //   : list,
     isFetching
   };
 };

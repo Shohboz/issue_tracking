@@ -29,6 +29,7 @@ export default (state = initialState, action) => {
         ...state,
         [uniqueKey]: { sortFn: enhancedSortFn, sortKey, isReverse }
       };
+    default:
+      return state;
   }
-  return state;
 };

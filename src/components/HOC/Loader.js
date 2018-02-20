@@ -36,7 +36,8 @@ export default WrappedComponent => (Wrapper = "div") => ({
         <Wrapper>
           {isFetching && <Preloader />}
           {!isFetching &&
-            !errors && <WrappedComponent {...this.props} items={list} />}
+            !errors &&
+            <WrappedComponent {...this.props} items={list} />}
           {errors && <ErrorPage errors={errors} />}
         </Wrapper>
       );
