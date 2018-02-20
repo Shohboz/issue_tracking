@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 
 export default class EditableString extends Component {
@@ -94,7 +94,7 @@ export default class EditableString extends Component {
   renderEditableComponent() {
     const { meta: { error, touched } } = this.state;
     return (
-      <div>
+      <Fragment>
         <div className="input-group">
           <input
             className="form-control"
@@ -120,7 +120,7 @@ export default class EditableString extends Component {
           </div>
         </div>
         {touched && (error && <span>{error}</span>)}
-      </div>
+      </Fragment>
     );
   }
 

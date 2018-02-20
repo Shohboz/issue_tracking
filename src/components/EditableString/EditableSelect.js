@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import Select from "react-select";
 import "react-select/dist/react-select.css";
@@ -97,7 +97,7 @@ export default class EditableString extends Component {
     const { value, meta: { error, touched } } = this.state;
     const { optionsToRender: options } = this.props;
     return (
-      <div>
+      <Fragment>
         <div className="input-group">
           <Select
             ref={e => {
@@ -124,7 +124,7 @@ export default class EditableString extends Component {
           </div>
         </div>
         {touched && (error && <span>{error}</span>)}
-      </div>
+      </Fragment>
     );
   }
 
