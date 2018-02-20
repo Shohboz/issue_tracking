@@ -10,7 +10,8 @@ export default class API {
 
   static update(data) {
     const { id, ...res } = data;
-    return fetch(`/api/myself`, {
+    const url = `/api/myself${res.pass ? "/password" : ""}`;
+    return fetch(url, {
       credentials: "include",
       method: "PATCH",
       headers: {

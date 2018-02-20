@@ -64,10 +64,14 @@ export default class EditableString extends Component {
   };
 
   onSubmit = () => {
-    const { onSave } = this.props;
-    const { value, meta: { error } } = this.state;
-    if (!error) {
-      this.setState({ editable: false });
+    const { onSave, staticWithoutValue } = this.props;
+    const { value } = this.state;
+    if (!this.validate(value)) {
+      if (staticWithoutValue) {
+        this.setState({ editable: false, value: "" });
+      } else {
+        this.setState({ editable: false });
+      }
       onSave(value);
     }
   };
@@ -125,10 +129,11 @@ export default class EditableString extends Component {
   }
 
   renderStaticComponent() {
-    const { tagName: Element, className } = this.props;
+    const { tagName: Element, className, staticWithoutValue } = this.props;
+    const val = staticWithoutValue ? "" : this.state.value;
     return (
       <Element className={`vlink ${className}`} onClick={this.onClick}>
-        {this.state.value}
+        {val}
       </Element>
     );
   }

@@ -25,5 +25,15 @@ export default ({ name, login, email, onSave }) => (
       onSave={onSave}
       validate={[nonEmpty]}
     />
+    <RenderEditableField
+      value={""}
+      name="pass"
+      tagName="i"
+      className="glyphicon glyphicon-edit"
+      staticWithoutValue={true}
+      label="Пароль"
+      onSave={onSave}
+      validate={[nonEmpty]}
+    />
   </div>
 );
