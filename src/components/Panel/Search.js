@@ -2,6 +2,8 @@ import React from "react";
 import { Panel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { components } from "components/ComposableList";
+import { connect } from "react-redux";
+import { isAdmin } from "redux/selectors";
 const { Filter } = components;
 
 const CreateButton = ({ title, link }) => (
@@ -14,16 +16,17 @@ const CreateButton = ({ title, link }) => (
   </Link>
 );
 
-export default ({
+const Search = ({
   searchBy,
   uniqueKey,
   placeholder,
   title,
   link,
-  SearchExtension
+  SearchExtension,
+  isAdmin
 }) => (
   <Panel.Body>
-    <CreateButton title={title} link={link} />
+    {isAdmin && <CreateButton title={title} link={link} />}
     <Filter
       uniqueKey={uniqueKey}
       searchBy={searchBy}
@@ -32,3 +35,7 @@ export default ({
     />
   </Panel.Body>
 );
+
+export default connect(state => ({
+  isAdmin: isAdmin(state)
+}))(Search);

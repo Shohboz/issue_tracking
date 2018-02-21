@@ -3,6 +3,8 @@ import { Panel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import NoItems from "components/EmptyList";
 import { components } from "components/ComposableList";
+import { connect } from "react-redux";
+import { isAdmin } from "redux/selectors";
 const { Enhanced, Sort } = components;
 
 const DisableIcon = () => (
@@ -42,11 +44,11 @@ const TableHeader = () => (
   </thead>
 );
 
-const Item = ({ id, name, login, email, enable, role }) => (
+const Item = ({ id, name, login, email, enable, role, isAdmin }) => (
   <tr>
     <td>{id}</td>
     <td>
-      <Link to={`/users/${id}`}>{name}</Link>
+      {(isAdmin && <Link to={`/users/${id}`}>{name}</Link>) || name}
     </td>
     <td>{login}</td>
     <td>{email}</td>
@@ -55,11 +57,13 @@ const Item = ({ id, name, login, email, enable, role }) => (
   </tr>
 );
 
-const TableBody = ({ items }) => (
-  <tbody>{items.map(item => <Item key={item.id} {...item} />)}</tbody>
+const TableBody = ({ items, isAdmin }) => (
+  <tbody>
+    {items.map(item => <Item isAdmin={isAdmin} key={item.id} {...item} />)}
+  </tbody>
 );
 
-export default ({ items, uniqueKey }) => (
+const Users = ({ isAdmin, items, uniqueKey }) => (
   <Panel.Body>
     <div className="table-responsive">
       <Enhanced uniqueKey={uniqueKey}>
@@ -67,7 +71,7 @@ export default ({ items, uniqueKey }) => (
           {items.length
             ? [
                 <TableHeader key="users-header" />,
-                <TableBody items={items} key="users-list" />
+                <TableBody isAdmin={isAdmin} items={items} key="users-list" />
               ]
             : <NoItems />}
         </table>
@@ -75,3 +79,7 @@ export default ({ items, uniqueKey }) => (
     </div>
   </Panel.Body>
 );
+
+export default connect(state => ({
+  isAdmin: isAdmin(state)
+}))(Users);

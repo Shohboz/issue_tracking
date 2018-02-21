@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import Issue from "../components/Show";
-// import EditForm from "../components/EditForm";
 import Preloader from "components/Preloader";
 import ErrorPage from "components/ErrorPage";
 import { save } from "redux/issues/actions";
@@ -11,7 +10,8 @@ import { loadAll as loadDepartments } from "redux/departments/actions";
 import {
   toObjectUsers,
   toObjectProjects,
-  toObjectDepartments
+  toObjectDepartments,
+  isAdmin
 } from "redux/selectors";
 
 class ReduxForm extends Component {
@@ -35,11 +35,11 @@ class ReduxForm extends Component {
   render() {
     const { isFetching, errors, data } = this.props;
     return (
-      <div>
+      <Fragment>
         {isFetching && <Preloader />}
         {!isFetching && data && <Issue {...this.props} />}
         {errors && <ErrorPage errors={errors} />}
-      </div>
+      </Fragment>
     );
   }
 }
@@ -55,6 +55,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     ...ownProps,
     data,
+    isAdmin: isAdmin(state),
     isFetching,
     optionsStatus,
     optionsUsers: toObjectUsers(state),

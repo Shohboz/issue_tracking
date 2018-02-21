@@ -14,33 +14,46 @@ const App = ({
   optionsUsers,
   optionsProjects,
   optionsDepartments,
-  save
+  save,
+  isAdmin
 }) => (
   <div>
     <Col xs={12} md={12}>
       <hr className="hr-text" data-content={"Подробно"} />
       <div className="row">
         <Col xs={12} md={6} className="form-horizontal">
-          <RenderSelectableField
-            value={data.status}
-            name="status"
-            id={data.id}
-            label="Статус"
-            optionsToRender={optionsStatus}
-            onSave={save}
-            format={getStatus}
-            validate={[nonEmpty]}
-          />
-          <RenderSelectableField
-            value={data.priority}
-            name="priority"
-            id={data.id}
-            label="Приоритет"
-            optionsToRender={optionsPriority}
-            onSave={save}
-            format={getPriority}
-            validate={[nonEmpty]}
-          />
+          {(isAdmin &&
+            <RenderSelectableField
+              value={data.status}
+              name="status"
+              id={data.id}
+              label="Статус"
+              optionsToRender={optionsStatus}
+              onSave={save}
+              format={getStatus}
+              validate={[nonEmpty]}
+            />) ||
+            <RenderStaticField
+              value={getStatus(data.status)}
+              name="status"
+              label="Cтатус"
+            />}
+          {(isAdmin &&
+            <RenderSelectableField
+              value={data.priority}
+              name="priority"
+              id={data.id}
+              label="Приоритет"
+              optionsToRender={optionsPriority}
+              onSave={save}
+              format={getPriority}
+              validate={[nonEmpty]}
+            />) ||
+            <RenderStaticField
+              value={getPriority(data.priority)}
+              name="priority"
+              label="Приоритет"
+            />}
           <RenderStaticField
             value={toLocaleDateString(data.created)}
             name="created"
@@ -61,7 +74,7 @@ const App = ({
           <RenderStaticField
             value={
               optionsUsers[data.assignee_id] &&
-              optionsUsers[data.assignee_id].name
+                optionsUsers[data.assignee_id].name
             }
             name="assignee"
             label="Исполнитель"
@@ -69,7 +82,7 @@ const App = ({
           <RenderStaticField
             value={
               optionsUsers[data.reporter_id] &&
-              optionsUsers[data.reporter_id].name
+                optionsUsers[data.reporter_id].name
             }
             name="reporter"
             label="Автор"
@@ -77,7 +90,7 @@ const App = ({
           <RenderStaticField
             value={
               optionsProjects[data.project_id] &&
-              optionsProjects[data.project_id].name
+                optionsProjects[data.project_id].name
             }
             name="project"
             label="Проект"
@@ -85,7 +98,7 @@ const App = ({
           <RenderStaticField
             value={
               optionsDepartments[data.department_id] &&
-              optionsDepartments[data.department_id].name
+                optionsDepartments[data.department_id].name
             }
             name="department"
             label="Отдел"
@@ -93,14 +106,13 @@ const App = ({
         </Col>
       </div>
     </Col>
-    {data.description && (
+    {data.description &&
       <Col xs={12} md={12}>
         <hr className="hr-text" data-content={"Описание"} />
         <Col xs={12} md={12}>
           <p>{data.description}</p>
         </Col>
-      </Col>
-    )}
+      </Col>}
     {data.uploads && <Files match={match} />}
 
     <Col xs={12} md={12}>

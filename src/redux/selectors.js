@@ -7,8 +7,9 @@ import {
   concat,
   identity,
   descend,
-  sort
-  // filter
+  sort,
+  map,
+  equals
 } from "ramda";
 import { Maybe } from "ramda-fantasy";
 import { toRenderList, toRenderObject } from "./helpers";
@@ -18,6 +19,7 @@ const usersSelector = compose(listSelector, prop("users"));
 const issuesSelector = compose(listSelector, prop("issues"));
 const projectsSelector = compose(listSelector, prop("projects"));
 const departmentsSelector = compose(listSelector, prop("departments"));
+const accountSelector = compose(prop("data"), prop("main"), prop("account"));
 
 const assignee_id = prop("assignee_id");
 const reporter_id = prop("reporter_id");
@@ -68,7 +70,7 @@ export const toObjectDepartments = createSelector(
   toRenderListObject
 );
 
-// export const archivedProjects = createSelector(
-//   projectsSelector,
-//   filter(prop("archived"))
-// );
+export const isAdmin = createSelector(
+  accountSelector,
+  compose(Maybe.maybe(false, equals("admin")), map(prop("role")), Maybe.toMaybe)
+);
