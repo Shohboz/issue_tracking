@@ -33,15 +33,14 @@ const Form = ({
         type="text"
         validate={[required]}
       />
-      {!id && (
+      {!id &&
         <Field
           name="pass"
           label="Пароль"
           component={RenderField}
           type="text"
           validate={[required]}
-        />
-      )}
+        />}
       <Field
         name="role"
         label="Роль"

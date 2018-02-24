@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import Form from "../components/Form";
+import UpdateForm from "../components/UpdateForm";
 import Preloader from "components/Preloader";
 import ErrorPage from "components/ErrorPage";
 import { save } from "redux/users/actions";
@@ -17,14 +18,28 @@ class ReduxForm extends Component {
     id ? load(id) : reset();
   }
 
+  onSave = data => {
+    const { match: { params: { userID: id } } } = this.props;
+    this.props.save({
+      ...data,
+      id
+    });
+  };
+
   render() {
-    const { isFetching, errors } = this.props;
+    const { isFetching, errors, match: { params: { userID } } } = this.props;
+    const Panel = userID ? UpdateForm : Form;
     return (
-      <div>
+      <Fragment>
         {isFetching && <Preloader />}
-        {!isFetching && <Form {...this.props} onSubmit={this.onSubmit} />}
+        {!isFetching &&
+          <Panel
+            {...this.props}
+            onSubmit={this.onSubmit}
+            onSave={this.onSave}
+          />}
         {errors && <ErrorPage errors={errors} />}
-      </div>
+      </Fragment>
     );
   }
 }
@@ -38,7 +53,14 @@ const mapStateToProps = (state, ownProps) => {
   const {
     users: { current: { main: { data: initialValues, isFetching, errors } } }
   } = state;
-  return { ...ownProps, initialValues, optionsRole, isFetching, errors };
+  return {
+    ...ownProps,
+    ...initialValues,
+    initialValues,
+    optionsRole,
+    isFetching,
+    errors
+  };
 };
 
 export default connect(mapStateToProps, { save, reset, load })(ReduxForm);
