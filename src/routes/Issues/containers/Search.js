@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { loadAll as load } from "redux/issues/actions";
 import { Grid } from "react-bootstrap";
 import { compose } from "recompose";
@@ -16,14 +16,14 @@ const { withPaginate, withSort } = enhancements;
 
 const List = compose(withSort(), withPaginate({ size: 15 })(Footer))(Items);
 
-const PaginatedList = ({ items, isFetching, errors }) => [
-  <PanelHeader uniqueKey={"issues"} key="header" />,
-  <div key="issues">
+const PaginatedList = ({ items, isFetching, errors }) => (
+  <Fragment>
+    <PanelHeader uniqueKey={"issues"} />
     {isFetching && <Preloader minHeight="200px" />}
     {!isFetching && !errors && <List items={items} uniqueKey={"issues"} />}
     {errors && <ErrorPage errors={errors} />}
-  </div>
-];
+  </Fragment>
+);
 
 const mapStateToProps = state => {
   const { issues: { main: { isFetching, errors } } } = state;
