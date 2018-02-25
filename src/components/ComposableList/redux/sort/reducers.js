@@ -1,18 +1,20 @@
 import { CHANGE } from "./constants";
 import { partition, isNotEmpty } from "./helpers";
-import sortBy from "lodash/sortBy";
+import { sortBy, reverse, concat, compose, curry } from "ramda";
 
 const initialState = {};
 
+const reversed = curry((cond, s) => (cond ? reverse(s) : s));
+
 function getEnhancedSortFn(isReverse, sortFn) {
-  return function(items) {
+  return items => {
     const [filledValues, emptyValues] = partition(items, item =>
       isNotEmpty(sortFn(item))
     );
 
-    return isReverse
-      ? sortBy(filledValues, sortFn).reverse().concat(emptyValues)
-      : sortBy(filledValues, sortFn).concat(emptyValues);
+    return compose(concat(emptyValues), reversed(isReverse), sortBy(sortFn))(
+      filledValues
+    );
   };
 }
 
