@@ -1,7 +1,5 @@
 import React from "react";
 
-const isEmpty = obj => Object.keys(obj).length === 0;
-
 const partition = (array, fn) => {
   let predictedArray = [];
   let restArray = [];
@@ -121,4 +119,4 @@ const getContextBase = contextTypes => BaseComponent => {
 
 const getContext = createHelper(getContextBase, "getContext");
 
-export { isEmpty, partition, isNotEmpty, getContext };
+export { partition, isNotEmpty, getContext };

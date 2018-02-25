@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { isEmpty } from "../../redux/sort/helpers";
+import { isEmpty } from "ramda";
 import { doTableSort } from "../../redux/sort/actions";
 
 const sortList = fn => list => (fn ? fn(list) : list);
