@@ -132,7 +132,9 @@ export default class EditableString extends Component {
     const { tagName: Element, className, format } = this.props;
     return (
       <Element className={`vlink ${className}`} onClick={this.onClick}>
-        {(this.state.value && format(this.state.value)) || ""}
+        {(this.state.value &&
+          ((format && format(this.state.value)) || this.state.value)) ||
+          ""}
       </Element>
     );
   }

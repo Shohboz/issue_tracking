@@ -11,10 +11,11 @@ export default ({
   name,
   onSave: save,
   format,
-  validate
+  validate,
+  labelStyle
 }) => (
   <div>
-    <label className="col-sm-4 control-label" style={{ textAlign: "left" }}>
+    <label className="col-sm-4 control-label" style={labelStyle || {}}>
       {label}
     </label>
     <div className="col-sm-8">

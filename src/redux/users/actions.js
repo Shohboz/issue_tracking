@@ -75,32 +75,53 @@ export function create(data) {
   };
 }
 
+const updatePass = (dispatch, data) =>
+  API.update(data).then(response => {
+    if (response.ok) {
+      createNotification(dispatch, {
+        type: SUCCESS,
+        text: `Пароль пользователя успешно обновлен`
+      });
+      dispatch({ type: UPDATE_OK, payload: response.json });
+    } else {
+      createNotification(dispatch, {
+        type: FAIL,
+        text: "Обновление пользовтеля завершилось ошибкой"
+      });
+    }
+  });
+
+const updateFields = (dispatch, data) =>
+  API.update(data)
+    .then(response =>
+      response.json().then(json => ({
+        ok: response.ok,
+        status: response.status,
+        json
+      }))
+    )
+    .then(response => {
+      if (response.ok) {
+        createNotification(dispatch, {
+          type: SUCCESS,
+          text: `Пользовтель #${response.json.id} успешно обновлен`
+        });
+        dispatch({ type: UPDATE_OK, payload: response.json });
+      } else {
+        createNotification(dispatch, {
+          type: FAIL,
+          text: "Обновление пользовтеля завершилось ошибкой"
+        });
+      }
+      return dispatch({ type: UPDATE_COMPLETE, payload: response.json });
+    })
+    .catch(errors => dispatch(receiveFail(errors)));
+
 export function update(data) {
   return dispatch => {
     dispatch({ type: REQUEST_UPDATE });
-    return API.update(data)
-      .then(response =>
-        response.json().then(json => ({
-          ok: response.ok,
-          status: response.status,
-          json
-        }))
-      )
-      .then(response => {
-        if (response.ok) {
-          createNotification(dispatch, {
-            type: SUCCESS,
-            text: `Пользовтель #${response.json.id} успешно обновлен`
-          });
-          dispatch({ type: UPDATE_OK, payload: response.json });
-        } else {
-          createNotification(dispatch, {
-            type: FAIL,
-            text: "Обновление пользовтеля завершилось ошибкой"
-          });
-        }
-        return dispatch({ type: UPDATE_COMPLETE, payload: response.json });
-      })
-      .catch(errors => dispatch(receiveFail(errors)));
+    return data.pass
+      ? updatePass(dispatch, data)
+      : updateFields(dispatch, data);
   };
 }

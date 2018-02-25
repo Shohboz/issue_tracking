@@ -21,8 +21,8 @@ export default class API {
   }
 
   static update(data) {
-    const { id, pass, ...res } = data;
-    return fetch(`/api/users/${id}`, {
+    const { id, ...res } = data;
+    return fetch(`/api/users/${id}${res.pass ? "/password" : ""}`, {
       credentials: "include",
       method: "PATCH",
       headers: {

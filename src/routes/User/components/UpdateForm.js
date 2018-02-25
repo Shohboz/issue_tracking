@@ -1,5 +1,5 @@
 import React from "react";
-import { RenderEditableField } from "components/Fields";
+import { RenderEditableField, RenderSelectableField } from "components/Fields";
 import { nonEmpty } from "redux/validation";
 
 export default ({ optionsRole, name, role, login, email, onSave }) => (
@@ -22,6 +22,14 @@ export default ({ optionsRole, name, role, login, email, onSave }) => (
       value={email}
       name="email"
       label="Email"
+      onSave={onSave}
+      validate={[nonEmpty]}
+    />
+    <RenderSelectableField
+      value={role}
+      name="role"
+      label="Роль"
+      optionsToRender={optionsRole}
       onSave={onSave}
       validate={[nonEmpty]}
     />
