@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Form from "../components/SearchForm";
 import { search } from "redux/issues/actions";
+import { updateForm } from "redux/issue/actions";
 import { actions } from "components/ComposableList";
 import { loadAll as loadProjects } from "redux/projects/actions";
 import { loadAll as loadDepartments } from "redux/departments/actions";
@@ -15,16 +16,15 @@ const { paginate } = actions;
 
 class PanelHeader extends Component {
   componentDidMount() {
-    const {
-      loadDepartments,
-      loadProjects
-    } = this.props;
+    const { loadDepartments, loadProjects, updateForm } = this.props;
     loadDepartments();
     loadProjects();
+    updateForm(null, "issues");
   }
 
   onSubmit = data => {
-    const { search, uniqueKey, paginate } = this.props;
+    const { search, updateForm, uniqueKey, paginate } = this.props;
+    updateForm(data, "issues");
     paginate(uniqueKey, { current: 0 });
     search(data);
   };
@@ -53,5 +53,6 @@ export default connect(mapStateToProps, {
   search,
   loadProjects,
   loadDepartments,
-  paginate
+  paginate,
+  updateForm
 })(PanelHeader);

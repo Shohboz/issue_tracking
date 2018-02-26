@@ -34,7 +34,7 @@ export default class API {
     });
   }
 
-  static search(data) {
+  static search(data = {}) {
     const {
       meeting_date_start,
       created_start,
@@ -56,7 +56,8 @@ export default class API {
 
     const _ = filter(Boolean, {
       ...res,
-      ...dates
+      ...dates,
+      limit: 15
     });
 
     const url = `/api/issues${jsonToQueryString(_)}`;

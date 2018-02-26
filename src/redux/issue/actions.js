@@ -2,7 +2,8 @@ import {
   REQUEST_START,
   REQUEST_SUCCESS,
   REQUEST_FAIL,
-  RESET
+  RESET,
+  UPDATE_FORM
 } from "./constants";
 import API from "redux/api/issues";
 
@@ -37,6 +38,14 @@ export function load(id, name = "") {
 export function reset(name = "") {
   return {
     type: RESET,
+    name
+  };
+}
+
+export function updateForm(payload, name) {
+  return {
+    type: UPDATE_FORM,
+    payload,
     name
   };
 }

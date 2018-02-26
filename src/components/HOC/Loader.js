@@ -9,20 +9,23 @@ export default WrappedComponent => (Wrapper = "div") => ({
   mapStateToProps,
   name,
   isDirectParams,
-  internal_name
+  internal_name,
+  onMountAction
 }) => {
   class Loader extends Component {
     componentDidMount() {
-      const { action, match: { params } } = this.props;
+      const { action, onMountAction, match: { params } } = this.props;
+      const _action = onMountAction || action;
 
       isDirectParams
-        ? action({ [internal_name]: params[prop] }, name)
-        : action(params[prop], name);
+        ? _action({ [internal_name]: params[prop] }, name)
+        : _action(params[prop], name);
     }
 
     componentDidUpdate(prevProps) {
       const { action, match: { params } } = this.props;
       const { match: { params: prevParams } } = prevProps;
+
       if (prevParams[prop] !== params[prop]) {
         isDirectParams
           ? action({ [internal_name]: params[prop] }, name)
@@ -32,6 +35,7 @@ export default WrappedComponent => (Wrapper = "div") => ({
 
     render() {
       const { errors, list, isFetching } = this.props;
+
       return (
         <Wrapper>
           {isFetching && <Preloader />}
@@ -44,5 +48,5 @@ export default WrappedComponent => (Wrapper = "div") => ({
     }
   }
 
-  return connect(mapStateToProps, { action })(Loader);
+  return connect(mapStateToProps, { action, onMountAction })(Loader);
 };

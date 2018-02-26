@@ -4,7 +4,7 @@ import Navigation from "./Navigation";
 export default ({ items, onPageChange, pageCount, current }) => (
   <ul className="pagination">
     <Navigation
-      title={<span>&#x27EA;</span>}
+      title={<span>⟪</span>}
       disabled={current === 0}
       onClick={e => {
         e.preventDefault();
@@ -12,7 +12,7 @@ export default ({ items, onPageChange, pageCount, current }) => (
       }}
     />
     <Navigation
-      title={<span>&#x27E8;</span>}
+      title={<span>⟨</span>}
       disabled={current === 0}
       onClick={e => {
         e.preventDefault();
@@ -33,7 +33,7 @@ export default ({ items, onPageChange, pageCount, current }) => (
       />
     ))}
     <Navigation
-      title={<span>&#x27E9;</span>}
+      title={<span>⟩</span>}
       disabled={current === pageCount - 1}
       onClick={e => {
         e.preventDefault();
@@ -43,7 +43,7 @@ export default ({ items, onPageChange, pageCount, current }) => (
       }}
     />
     <Navigation
-      title={<span>&#x27EB;</span>}
+      title={<span>⟫</span>}
       disabled={current === pageCount - 1}
       onClick={e => {
         e.preventDefault();

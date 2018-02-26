@@ -1,3 +1,5 @@
+import { is } from "ramda";
+
 export function getVisibleList(list, pager) {
   const { size, current, server } = pager;
   const from = current * size;
@@ -5,11 +7,12 @@ export function getVisibleList(list, pager) {
 }
 
 export function getPageCount(list = [], size) {
-  return Math.ceil(list.length / size);
+  return Math.ceil((is(Array, list) ? list.length : list) / size);
 }
 
 export function getPageList(count = 0, pager) {
   const { paginate, current } = pager;
+
   let firstPage = current === 0 ? current : current - Math.floor(paginate / 2);
   firstPage = firstPage < 0 ? 0 : firstPage;
   const lastPage = firstPage + paginate;

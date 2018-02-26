@@ -1,5 +1,5 @@
-import React from "react";
-import { loadAll as load } from "redux/issues/actions";
+import React, { Fragment } from "react";
+import { loadAll as load, search } from "redux/issues/actions";
 import { Grid } from "react-bootstrap";
 import { compose } from "recompose";
 import { enhancements } from "components/ComposableList";
@@ -16,7 +16,7 @@ const { withPaginate, withFilter, withSort } = enhancements;
 const List = compose(
   withSort(),
   withFilter(),
-  withPaginate({ size: 15 })(Footer)
+  withPaginate({ size: 15, server: true, action: search })(Footer)
 )(Items);
 
 const AdvancedSearch = () => (
@@ -29,31 +29,34 @@ const AdvancedSearch = () => (
   </div>
 );
 
-const PaginatedList = ({ items }) => [
-  <PanelHeader
-    key="header"
-    searchBy={["name", "title"]}
-    uniqueKey="issues"
-    placeholder={"Поиск по названию вопроса"}
-    title={"Добавить вопрос"}
-    link={"/issues/new"}
-    SearchExtension={AdvancedSearch}
-  />,
-  <List items={items} uniqueKey={"issues"} key="issues" />
-];
+const PaginatedList = ({ items, total }) => (
+  <Fragment>
+    <PanelHeader
+      searchBy={["name", "title"]}
+      uniqueKey="issues"
+      placeholder={"Поиск по названию вопроса"}
+      title={"Добавить вопрос"}
+      link={"/issues/new"}
+      SearchExtension={AdvancedSearch}
+    />
+    <List total={total} items={items} uniqueKey={"issues"} />
+  </Fragment>
+);
 
 const mapStateToProps = state => {
-  const { issues: { main: { isFetching, errors } } } = state;
+  const { issues: { main: { isFetching, errors, total } } } = state;
   return {
     errors,
     list: withNames(state),
-    isFetching
+    isFetching,
+    total
   };
 };
 
 export default withLoader(
   withPanel(PaginatedList)({ title: "Список вопросов" })
 )(Grid)({
+  onMountAction: search,
   action: load,
   mapStateToProps,
   prop: "issueID"

@@ -5,7 +5,8 @@ import current from "redux/issue/reducers";
 const initialState = {
   isFetching: false,
   list: [],
-  errors: ""
+  errors: "",
+  total: null
 };
 
 export function main(state = initialState, action) {
@@ -21,6 +22,7 @@ export function main(state = initialState, action) {
         ...state,
         isFetching: false,
         list: action.payload,
+        total: action.total,
         lastUpdated: action.receivedAt,
         errors: ""
       };

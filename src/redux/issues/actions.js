@@ -21,6 +21,7 @@ const loadStart = () => ({
 const receiveList = json => ({
   type: REQUEST_SUCCESS,
   payload: json.list,
+  total: json.total,
   receivedAt: Date.now()
 });
 
